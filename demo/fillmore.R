@@ -1,0 +1,379 @@
+## fillmore.R
+
+## copied from demo graphics
+if(dev.cur() <= 1) get(getOption("device"))()
+
+opar <- par(ask = interactive() &&
+            (.Device %in% c("X11", "GTK", "gnome", "windows","quartz")))
+
+
+caption<-function (x) 
+{
+    cat("Press <Enter> to continue...")
+    readline()
+    invisible()
+}
+
+
+options(digits=4)
+
+## replace cyan in rainbow(4) with darkgreen
+colors2<-c("#FF0000", "#80FF00", "darkgreen", "#8000FF")
+
+
+# ---------------------------------------------------------------- #
+# Data sets
+
+data(aq.trans)
+
+
+
+years<-1996:2003
+
+
+# ---------------------------------------------------------------- #
+# Fillmore stage vector and plot
+
+## assign stages....
+
+sv.fill <- table(aq.trans$stage, aq.trans$year)
+
+rbind(sv.fill, TOTAL=apply(sv.fill, 2,sum))
+
+## mean vector
+round(apply(sv.fill, 1, mean),0)
+
+## remove seed bank seeds
+stage.vector.plot(sv.fill[-1,], prop=FALSE, ylab = "Total number of plants", 
+    main = "Fillmore Canyon stage vectors")
+
+
+
+
+# ---------------------------------------------------------------- #
+# DENISTY plots at Fillmore Canyon (using 1 meter square plots here-actual density in columbine.plots.data)
+
+a<-ftable( aq.trans$plot, aq.trans$stage, aq.trans$year)
+
+dim(a)
+## PLOT four stage classes: recruits, small and large veg, flowering plants
+
+op<-par(mfrow=c(2,2), mar=c(4, 4, 2 , 2) , oma=c(1,1,2,0))
+
+fstages<-c("Recruits", "Small vegetative", "Large vegetative", "Flowering plants")
+
+## skip seeds
+for (i in 2:5)
+{
+   x<-a[seq(i,50,5),]   
+   plot(years, x[1,], type='n',  ylim=c(0,max(x)), ylab=fstages[i-1], xlab="Year")
+   for (j in 1:10)
+   {
+       lines(years, x[j,], col=rainbow(10)[j])
+   }
+}
+title(expression(paste("Plant density in 10 demography plots (", m^-2, ")")), outer=TRUE)
+
+
+par(op)
+
+
+
+# ---------------------------------------------------------------- #
+# BUILD a projection matrix for Aquilegia
+
+
+## 1.  get transitions for a single projection interval (1996-1997)
+
+x<-subset(aq.trans, year==1996)
+
+## 2. number of recruits in 1997 
+
+recruits<- sv.fill["recruit", "1997"]
+
+## 3.  Use aq.matrix() to build matrix 
+
+aq.96<- aq.matrix(x, recruits)
+aq.96
+caption("1996-1997 projection matrix and vectors from aq.matrix")
+
+
+# ---------------------------------------------------------------- #
+#  Population projections
+
+p<-pop.projection(aq.96$A, aq.96$n)
+
+p
+
+## exclude seeds
+stage.vector.plot(  p$stage.vectors[-1,1:10], xlab="Years after 1996", main="Convergence to stable stage distribution")   
+
+# ---------------------------------------------------------------- #
+#  Eigenvalues and vectors
+
+eig.96<- eigen.analysis(aq.96$A)
+
+eig.96
+
+
+## Plot methods
+barplot(eig.96$stable.stage, col="blue", ylim=c(0,1), ylab="Proportion", xlab="Stage class", main="Stable stage distribution from 96-97 matrix")
+box()
+
+
+ymax<-max(eig.96$repro.value)*1.25
+barplot(eig.96$repro.value, col="green", ylim=c(0,  ymax ), xpd=FALSE, ylab="Reproductive value", xlab="Stage Class", main="Reproductive values from 96-97 matrix")
+box()
+
+
+eig.96$elasticities
+
+## no 3-d barplot like Matlab  -- use heatmap?   image uses heat.colors(12) by default to create heat-spectrum (red to white) -  need to add color bar?
+
+op<-par(cex.main=.8) 
+heatmap(eig.96$elasticities[order(5:1),], Rowv=NA, Colv=NA, scale="none", margin=c(8,8), ylab="Fate", xlab="Stage", main="Elasticities from 96-97 matrix", col=rev(heat.colors(24)))
+par(op)
+
+
+
+# ---------------------------------------------------------------- #
+#  Bootstrap confidence intervals
+
+# get transitions with individual fertilities
+y<-aq.matrix(x, recruits, summary=FALSE)
+
+# 200 bootstrap samples for speed (5000 is default) -
+#  estimated seed bank survival and recruitment does not vary here, but could
+
+aq.96.boot<-boot.transitions(y, 200, add=c(1,1, aq.96$seed.survival, 2,1, aq.96$recruitment.rate) )
+
+# calculate confidence intervals using quantile() or perc.ci and other methods in boot package
+
+ci<- quantile(aq.96.boot$lambda, c(0.025,0.975) )
+
+aq.96$lambda
+ci
+
+# plot histogram  ... plotCI in gplots and other packages
+hist(aq.96.boot$lambda, col="green", xlab="Lambda", main=paste('Bootstrap estimates of population\ngrowth rate from 1996-1997'))
+abline(v=ci, lty=3)
+
+
+# ---------------------------------------------------------------- #
+# CALCULATE population growth rates using constant 10,000 seed bank and 12.6% seed survival
+
+
+years<-1996:2002
+n<-length(years)
+
+
+fill1.all<- vector("list", n)
+names(fill1.all)<-years
+
+
+
+fill1<-matrix(numeric(length(years)*5), nrow=n, dimnames=list(years, c("lambda", "seed.new", "seed.b0", "seed.b1", "rec.rate") )) 
+
+for (s.year in years)
+{
+   i<-s.year- (years[1]-1)   ## index for list starting at 1
+   x<-aq.matrix(subset(aq.trans, year==s.year), sv.fill['recruit', as.character(s.year+1)] )
+   fill1[i,] <- c(x$lambda, x$seeds.from.plants, x$seed.bank, x$n1[1], x$recruitment.rate)
+   fill1.all[[i]]<-x
+ }
+
+fill1.all[["1997"]]
+fill1
+
+
+plot(rownames(fill1), fill1[,1], type='b', ylim=c(0,1.4), xlab="Year", ylab="Growth rate" , main=paste("Population growth rate using constant \nseed bank size and seed survival rate"), col="red", pch=16, las=1)
+ abline(h=1, lty=3)
+
+
+
+# ---------------------------------------------------------------- #
+# VITAL RATES and matrix elements....
+
+
+## list only projection matrices - will be used later for stochastic growth
+fill.A<-lapply(fill1.all, FUN="[[", "A")
+
+## add column names using matrix element notation aij where i=row and j=column))
+fill.vr<-matrix(unlist(fill.A), nrow= n , byrow=TRUE,
+           dimnames=list(years, paste("a", 1:5 , rep(1:5,each=5), sep="")) )
+
+## mean matrix and variation
+fill.vr<-rbind(fill.vr, mean=apply(fill.vr, 2, mean), var=apply(fill.vr, 2, var) )
+
+# TABLE using years as columns and ignoring empty elements
+t( fill.vr[,c(1:2, 8,10,13:15,18:25)] )
+
+caption("Estimated projection matrix elements for 11 years")
+
+##  Matrix element Correlations  
+
+vr2<-fill.vr[1:n,c(1:2, 8,10,13:15,18:25)]
+
+# turn off warning standard deviation is zero in: cor(x, y, na.method, method == "kendall")
+options(warn=-1)
+z<-cor(vr2)
+options(warn=0)
+
+z[upper.tri(z)]<-NA
+
+z
+
+## plot using heatmap?
+heatmap(z[order(15:1),], Rowv=NA, Colv=NA, scale="none", main="Correlation matrix 96-02", xlab="Matrix element", col=rev(heat.colors(24)))
+
+
+# ---------------------------------------------------------------- #
+# Mean matrix
+A.mean<-matrix(fill.vr["mean",],  nrow=5, dimnames=dimnames(fill.A[[1]]))
+
+A.mean
+
+eigen.analysis(A.mean)
+caption("Eigen analysis of mean matrix")
+
+
+# ---------------------------------------------------------------- #
+#  AGE specific rates
+
+# split A into T and F (could change aq.matrix output, but fertility always in a15 and a25)
+
+aq.tf<-function(A){
+z<-matrix(c(rep(0,20), rep(1,2), rep(0,3)), nrow=5)
+list(T=(1-z)*A, F=z*A)
+}
+
+x<-aq.tf(A.mean)
+
+x
+
+generation.time(x$T, x$F)
+net.reproductive.rate(x$T, x$F)
+fundamental.matrix(x$T)$N
+
+caption("Age-specific traits from mean matrix")
+
+## Check generation time for all matrices.  If F matrix is empty, generation time is Inf
+lapply(fill.A, function(A){x<-aq.tf(A); generation.time(x$T, x$F)})
+
+caption("Generation time for each projection matrix")
+
+
+
+
+# ---------------------------------------------------------------- #
+# VARY seed survival rates before matrix construction
+#  --  seed survival part of three matrix elements (1 seed survival,2 fertilities in prebreeding census)
+
+
+fill.seed.surv <- vector("list", n) 
+names(fill.seed.surv)<- years
+
+for (s.year in years)
+{
+   z<-s.year - (years[1]-1)
+   fill.seed.surv[[z]]<-matrix(numeric(11*3), nrow=11,
+            dimnames=list(1:11, c("survival", "lambda", "seeds")) ) 
+   for (i in seq(0,100,10))
+   {
+      x<-aq.matrix(subset(aq.trans, year==s.year),
+                   sv.fill['recruit',as.character(s.year+1)], seed.survival=i/100)
+      fill.seed.surv[[z]][(i+10)/10,]<- c(i/100, x$lambda, x$n1[1])
+   }
+}
+
+fill.seed.surv[["1996"]]
+
+plot(fill.seed.surv[["1996"]][,1], fill.seed.surv[["1996"]][,2], type="n",
+     xlim=c(-0.08,1), ylim=c(0,1.5), xlab="Seed survival rate", ylab="Growth rate " ,
+     main=paste("Changes in seed survival rate\n on population growth rate"))
+
+abline(h=1, lty=2)
+for (i in 1:n)
+{
+  lines(fill.seed.surv[[i]][,1], fill.seed.surv[[i]][,2], lwd=2, col=rainbow(11)[i], lty=i)
+}
+
+#LABELS?
+y.abbr<-substr(as.character(years),3,4)
+
+y<-numeric(n)
+for (i in 1:n){y[i]<-fill.seed.surv[[i]][1,2]}
+
+text(-.08, y, y.abbr, pos=4)
+
+
+##-------------------------------------------------------------##
+#  VARY seed bank size from 1000 to 20000  in 1997 only (for  demo) 
+
+##  no recruits survive in 99, 01,02,03 so seed bank size does not alter the growth rate in these years
+
+
+   fill.seed.97<-matrix(numeric(25*2), nrow=25 ) 
+   for (i in seq(1000,25000,1000))
+   {
+      x<-aq.matrix(subset(aq.trans,  year==1997),
+                   sv.fill['recruit','1998'], seed.bank.size= i  )
+      fill.seed.97[i/1000,]<- c(i, x$lambda )
+   }
+
+
+plot(fill.seed.97[,1], fill.seed.97[,2], 
+     xlab="Seed bank size", ylab="Growth rate " , type="b", pch=16, col="green",
+     main=paste("Changes in seed bank size\non population growth rate in 1997"))
+
+
+# ---------------------------------------------------------------- #
+#  STOCHASTIC growth rates  -this will take a while
+
+eigen.analysis(A.mean)$lambda
+
+
+stoch.growth.rate(fill.A)
+
+
+# ---------------------------------------------------------------- #
+#  Stochastic population sizes
+
+sv.mean<-c(seed=10000, round(apply(sv.fill, 1, mean),0)[-1])
+
+
+##  set 2000 above-ground plants as max density in 15 m2 plots...
+aq.sp1<-stoch.projection(fill.A[1:3], sv.mean, nreps=1000,tmax=25, nmax=2000, sumweight=c(0,1,1,1,1) )
+
+
+
+hist(apply(aq.sp1[,-1], 1, sum), col="green", xlim=c(0,2000), xlab="Final population size (excluding seeds)", main=paste('Stochastic growth projections\nafter 25 years using 96-98 matrices'), breaks=seq(0,2000, 100))
+
+## starting size
+abline(v=sum(sv.mean[-1]), lty=2)
+
+# ---------------------------------------------------------------- #
+# QUASI-extinction
+
+aq.ex.seed<-stoch.quasi.ext(fill.A, n0=sv.mean, Nx=1, nreps=500, sumweight=c(0,1,1,1,1))
+
+
+plot(aq.ex.seed[,1], xlab="Years", ylab="Quasi-extinction probability", type="n", ylim=c(0,max(aq.ex.seed)), main=paste("Time to reach a quasi-extinction\nthreshold of 1 above-ground individual using 96-02 matrices"))
+for(i in 1:dim(aq.ex.seed)[2])
+  {
+    lines(aq.ex.seed[,i], col=rainbow(dim(aq.ex.seed)[2])[i])
+  }
+
+
+
+
+
+
+par(opar)
+
+
+
+
+
+
+
