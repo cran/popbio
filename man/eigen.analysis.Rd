@@ -40,10 +40,12 @@ a<-eigen.analysis(whaleA)
 a
 
 ymax<-max(a$repro.value)*1.25
-barplot(a$repro.value, col="blue", ylim=c(0,  ymax ), xpd=FALSE, ylab="Reproductive value", xlab="Killer whale stage Class")
+barplot(a$repro.value, col="blue", ylim=c(0,  ymax ), xpd=FALSE, 
+       ylab="Reproductive value", xlab="Killer whale stage class")
 box()
 
-## display sensitititivies of "impossible" transitions (postreprod -> juvenile, yearling -> mature, etc)
+## display sensitititivies of "impossible" transitions 
+## (postreprod -> juvenile, yearling -> mature, etc)
 eigen.analysis(whaleA, zero=FALSE)$sensitivities
 
 data(teasel)
@@ -52,7 +54,8 @@ teaselA<-teasel$T + teasel$F
 
 a<-eigen.analysis(teaselA)
 a
-barplot(a$stable.stage, col="green", ylim=c(0,1), ylab="Stable stage proportion", xlab="Teasel stage class")
+barplot(a$stable.stage, col="green", ylim=c(0,1), 
+       ylab="Stable stage proportion", xlab="Teasel stage class")
 box()
 
 

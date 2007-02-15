@@ -9,9 +9,9 @@ stoch.growth.rate(matrices, prob = NULL, maxt = 50000)
 }
 
 \arguments{
-  \item{matrices}{ a list with two or more projection matrices, or a matrix with one projection matrix per column, with elements filled by columns }
+  \item{matrices}{ a \code{\link{list}} with two or more projection matrices, or a matrix with one projection matrix per column, with elements filled by columns }
   \item{prob}{ a vector of probability weights used by \code{\link{sample}} for selecting the projection matrices, defaults to equal probabilities }
-  \item{maxt}{ Number of time intervals, default 50,000  }
+  \item{maxt}{ number of time intervals, default 50,000  }
 }
 %\details{}
 \value{

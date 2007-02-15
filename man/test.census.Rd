@@ -36,7 +36,8 @@ reshape(test.census, direction="wide", idvar="plant", timevar="year")
 
 ## Convert to transition table using merge
 
-trans <- subset(merge(test.census, test.census, by="plant", sort=FALSE),  year.x==year.y-1)
+trans <- subset(merge(test.census, test.census, by="plant", sort=FALSE), 
+               year.x==year.y-1)
 trans
 
 ## format column and row names
@@ -51,11 +52,11 @@ trans$fate  <- ordered(trans$fate,  levels = c(test.stage,"dead"))
 
 test.trans <- subset(trans, year==2001)
 
-
 seedlings<-nrow(subset(test.census, year==2002 & stage=="seedling"))
 
-### add individual fertilities using "anonymous reproduction"  based on the proportional reproductive 
-## outputs of flowering plants and the total number of seedlings at the end of the projection interval
+## add individual fertilities using "anonymous reproduction"  based on the 
+## proportional reproductive outputs of flowering plants and the total number 
+## of seedlings at the end of the projection interval
 
 test.trans$seedling<-test.trans$fruits/sum(test.trans$fruits) * seedlings
 

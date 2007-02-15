@@ -6,7 +6,8 @@
  Plots short-term dynamics and convergence to stage stage distribution using stage vector projections.  
 }
 \usage{
-stage.vector.plot(stage.vectors, proportions=TRUE, legend.coords="topright", ylim=NULL, xlab="Years", ylab=NULL,  ... )
+stage.vector.plot(stage.vectors, proportions=TRUE, legend.coords="topright", 
+        ylim=NULL, xlab="Years", ylab=NULL,  ... )
 }
  
 \arguments{

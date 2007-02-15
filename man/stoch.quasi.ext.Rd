@@ -5,10 +5,11 @@
   Estimate the quasi-extinction probability by simulation for a structured population in an an independently and identically distributed stochastic environment
 }
 \usage{
-stoch.quasi.ext(matrices, n0, Nx, tmax = 50, maxruns = 10, nreps = 5000, prob = NULL, sumweight = NULL)
+stoch.quasi.ext(matrices, n0, Nx, tmax = 50, maxruns = 10, nreps = 5000, 
+                         prob = NULL, sumweight = NULL)
 }
 \arguments{
-  \item{matrices}{ a list with two or more projection matrices, or a matrix with one projection matrix per column, with elements filled by columns }
+  \item{matrices}{ a \code{\link{list}} with two or more projection matrices, or a matrix with one projection matrix per column, with elements filled by columns }
    \item{n0}{ initial population vector }
   \item{Nx}{ quasi-extinction threshold  }
   \item{tmax}{ number of time steps or projection intervals  }
@@ -29,7 +30,7 @@ Morris, W. F., and D. F. Doak. 2002. Quantitative conservation biology: Theory a
 }
 \author{ Chris Stubben }
 
-\seealso{See also \code{\link{stoch.projection}} }
+\seealso{\code{\link{stoch.projection}} }
 \examples{
 
 data(hudsonia)

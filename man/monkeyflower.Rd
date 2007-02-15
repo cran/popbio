@@ -44,11 +44,13 @@
 \examples{
 data(monkeyflower)
 
-A <- subset(monkeyflower, species=="cardinalis" & site=="Carlon" & year=="pooled",  select=c(4:19))
+A <- subset(monkeyflower, 
+           species=="cardinalis" & site=="Carlon" & year=="pooled",  
+           select=c(4:19))
 
 stages<-c("seed", "sm.nr", "lg.nr", "repro")
 
-A <- matrix(unlist(A), nrow=4, byrow=TRUE, dimnames=list(stages, stages) );
+A <- matrix(unlist(A), nrow=4, byrow=TRUE, dimnames=list(stages, stages) )
 
 A
 

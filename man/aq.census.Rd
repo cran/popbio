@@ -29,7 +29,7 @@ complete census data from 1995-2006.
 }
 \source{ Data set owners: Brook Milligan, Chris Stubben, Allan Strand}
 %\references{}
-\seealso{see \code{\link{aq.trans}} for annual transitions with stage and fate in same row }
+\seealso{ \code{\link{aq.trans}} for annual transitions with stage and fate in same row }
 \examples{
 data(aq.census)
 

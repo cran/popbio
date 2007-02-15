@@ -21,7 +21,7 @@ seed.bank.size = 10000, seeds.per.fruit = 120, ...)
   \item{...}{additional arguments passed to \code{\link{projection.matrix}}} 
 }
 \details{
-  Adds individual fertilites to annual transitions using a prebreeding census and outputs the projection matrix.
+  Adds individual fertilites to annual transitions using a prebreeding census.
 }
 \value{
   If summary is TRUE, a list with

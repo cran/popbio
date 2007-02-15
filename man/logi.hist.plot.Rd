@@ -5,7 +5,9 @@
 \description{ Plot combined graphs for logistic regressions 
   }
 \usage{
-logi.hist.plot(independ, depend, logi.mod = 1, type = "dit", boxp = TRUE, rug = FALSE, ylabel = "Probability", ylabel2 = "Frequency", xlabel = "", mainlabel = "", las.h = 1, counts = FALSE, ...)
+logi.hist.plot(independ, depend, logi.mod = 1, type = "dit", 
+boxp = TRUE, rug = FALSE, ylabel = "Probability", ylabel2 = "Frequency", 
+xlabel = "", mainlabel = "", las.h = 1, counts = FALSE, ...)
 }
 
 \arguments{
@@ -28,9 +30,8 @@ logi.hist.plot(independ, depend, logi.mod = 1, type = "dit", boxp = TRUE, rug = 
   A logistic regression plot
 }
 \references{ de la Cruz Rot, M. 2005. Improving the Presentation of Results of Logistic Regression with R.  ESA Bulletin 86:41-48.
-\url{http://esapubs.org/bulletin/backissues/086-1/bulletinjan2005.htm}
 
-Original code at \url{http://esapubs.org/bulletin/backissues/086-1/bulletinjan2005.htm#et}
+\url{http://esapubs.org/bulletin/backissues/086-1/bulletinjan2005.htm}
 
  }
 \author{ M. de la Cruz Rot }
@@ -45,7 +46,8 @@ a<-subset(aq.trans, leaf<50 & stage!="recruit", c(leaf,survived))
 
 logi.hist.plot(a$leaf,  a$survived, 
 type="hist", boxp=FALSE, counts=TRUE, las.h=0, int=10, 
-ylabel="Survival probability", ylabel2="Number of plants", xlab="Number of leaves" )
+ylabel="Survival probability", ylabel2="Number of plants", 
+ xlab="Number of leaves" )
 
 
 
