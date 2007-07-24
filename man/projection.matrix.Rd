@@ -85,7 +85,7 @@ sf<- subset(aq.trans, year==1998 & plot==909, c(year, plant, stage, fruits, fate
 ## seedlings next year
 seedlings<-nrow(subset(aq.trans, plot==909 & year==1999 & stage=="recruit")) 
 
-## ADD individual fetility estimates for recruits and seeds assuming seed bank and
+## ADD individual fertility estimates for recruits and seeds assuming seed bank and
 ## new seeds contribute to a common germinant pool with equal chance of recruitment
 
 seed.survival<-.4

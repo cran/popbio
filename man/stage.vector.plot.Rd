@@ -7,16 +7,18 @@
 }
 \usage{
 stage.vector.plot(stage.vectors, proportions=TRUE, legend.coords="topright", 
-        ylim=NULL, xlab="Years", ylab=NULL,  ... )
+        ylim=NULL, xlab="Years", ylab=NULL, col=rainbow(12),  ... )
 }
  
 \arguments{
-  \item{stage.vectors}{ a matrix listing stage class vectors in columnw}
+  \item{stage.vectors}{ a matrix listing stage class vectors in columns}
   \item{proportions}{ plot proportional changes or total numbers, defaults to proportions. }
   \item{legend.coords}{ a \code{\link{legend}} keyword or vector of x,y coordinates, defaults to top-right corner }
   \item{ylim}{the y limits of the plot, defaults to min and max values in stage.vector.projections}
   \item{xlab}{a label for the x axis}
   \item{ylab}{a label for the y axis}
+  \item{col}{Vector of color names for line drawings.  Default is rainbow(12)}
+ 
   \item{...}{additional options are passed to \code{\link{plot}} function}
 
 
@@ -42,15 +44,18 @@ n<-c(25,25,25)
 p<-pop.projection(A,n, 15)
 
 
-op <- par(ask = TRUE )
-stage.vector.plot(p$stage.vectors)
+
+## change default rainbow colors
+stage.vector.plot(p$stage.vectors, col=2:4)
+stage.vector.plot(p$stage.vectors, col="gray")
+
 
 stage.vector.plot(p$stage.vectors, prop=FALSE, legend=c(1,300))
 ## log scale
 stage.vector.plot(p$stage.vectors, prop=FALSE, log='y', 
    legend="bottomright", ylab="Number in stage class (log scaled)")
 
-par(op)
+
 
 }
 \keyword{ survey }

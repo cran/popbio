@@ -1,9 +1,14 @@
-stage.vector.plot<-function(stage.vectors, proportions=TRUE, legend.coords="topright", ylim=NULL, xlab="Years", ylab=NULL,  ... )
+stage.vector.plot<-function(stage.vectors, proportions=TRUE, legend.coords="topright", ylim=NULL, xlab="Years", ylab=NULL, col=rainbow(12), ... )
 {
     p<-stage.vectors
-    x<-colnames(p)                    # x-axis
-    if(is.null(x)){x<-1:dim(p)[2]}
     n<-dim(p)[1]                      #number of stage vectors
+    if(is.null(n)){stop("stage.vectors should be a matrix with two or more stages")}
+
+    x<-colnames(p)                      # x-axis names
+    if(is.null(x)){x<-0:(dim(p)[2]-1)}  # start at 0,1,2,... if colnames missing
+    
+    if(length(col)<n){col<-rep(col,n)}  ## line colors (repeat if necessary)
+    
     if(proportions)                       
     {
        if(is.null(ylab)){ylab<- "Proportion in stage class" }
@@ -23,8 +28,13 @@ stage.vector.plot<-function(stage.vectors, proportions=TRUE, legend.coords="topr
 
     for (i in y$ix )                ## Loop through stage classes
     {                 
-       lines(x, p[i,],lty=i, col=rainbow(n)[i], lwd=2)
+       lines(x, p[i,],lty=i, col=col[i], lwd=2)
     }
-    legend(legend.coords[1],legend.coords[2], paste(names(y$x), ""), lty=y$ix, col=rainbow(n)[y$ix], lwd=2)
+    
+    
+    leg.names<-paste(names(y$x), "")  ## pad names with trailing space for extra room
+    if(leg.names[1]==" "){leg.names<-paste("row", y$ix, "")}
+    
+   legend(legend.coords[1],legend.coords[2], leg.names, lty=y$ix, col=col[y$ix], lwd=2)
 }
 

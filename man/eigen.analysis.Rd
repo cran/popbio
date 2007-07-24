@@ -13,7 +13,14 @@ eigen.analysis(A, zero=TRUE)
   \item{A}{ a projection matrix }
   \item{zero}{ Set sensitivities for unobserved transitions to zero }
 }
-%\details{ Damping ratio is described in section 4.7.1 in Caswell 2001  }
+\details{ The calculation of eigenvalues and eignvectors in Matlab is
+  listed in section 4.8.1 (p. 107) in Caswell (2001).  In addition,
+  the damping ratio is described in section 4.7.1, sensitivities in
+  section 9.1, and elasticities in section 9.2}
+
+\note{ If matrix A is singular,  then \code{eigen.analysis} will return
+  elasticities, sensitivities, and reproductive values  with  NAs}
+
 \value{
 A list with 6 items
     \item{lambda }{dominant eigenvalue}
