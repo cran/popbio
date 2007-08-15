@@ -33,34 +33,32 @@ A list with 5 items
 
 \seealso{ \code{\link{stage.vector.plot}} to plot stage vectors}
 \examples{
-
+## mean matrix from Freville et al 2004
 stages<-c("seedling", "vegetative", "flowering")
 A<-matrix(c(
-0,    0,    6,
-0.4,  0.6,  0.02,
-0.01, 0.2,  0.25
+    0,     0,  5.905,
+0.368, 0.639,  0.025,
+0.001, 0.152,  0.051
 ), nrow=3, byrow=TRUE, 
     dimnames=list(stages,stages) 
 )
 
-n<-c(25,25,25)
-pop.projection(A,n, 15)
-
+n<-c(5,5,5)
+p<-pop.projection(A,n, 15)
+p
+stage.vector.plot(p$stage.vectors, col=2:4)
 eigen.analysis(A)$damping.ratio
-pop.projection(A,n, 50)$pop.changes
-
-
+####
 
 data(whale)
 A<-whale$T+whale$F
-n<-c(4,38,36,22)
-
+#n<-c(4,38,36,22)
+n<-c(5,5,5,5)
+p<-pop.projection(A,n, 15)
+p
+stage.vector.plot(p$stage.vectors, col=2:4, ylim=c(0, 0.6))
 ## convergence is slow with damping ratio close to 1
-pop.projection(A,n, 10)
-
 eigen.analysis(A)$damping.ratio
-
-pop.projection(A,n, 250)$pop.changes
-
+pop.projection(A,n, 100)$pop.changes
 }
 \keyword{ survey }

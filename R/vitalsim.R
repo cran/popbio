@@ -1,11 +1,13 @@
-vitalsim <-function(vrmeans, vrvars, corrin, corrout, makemx, n0, yrspan, Ne=500, tmax=50,runs=100, corr.power="matrix", vrtypes=NULL, vrmins=NULL, vrmaxs=NULL,sumweight=NULL)
+vitalsim <-function(vrmeans, vrvars, corrin, corrout, makemx, n0, yrspan, Ne=500, tmax=50, runs=500, vrtypes=NULL, vrmins=NULL, vrmaxs=NULL,sumweight=NULL)
 {
-x1<-length(vrmeans)
+x1<-length(vrmeans)  
 x2<-length(n0)
 x3<-dim(corrin)[1]
 ## calcualte np and np2 
 np<-x3
 np2<-x1-x3
+np3 <- np*yrspan   ## correction in email from Doak 8/4/07
+
 ## create some reasonable defaults if not specified
  if(missing(vrmins)){vrmins=rep(0,x1)}
  if(missing(vrmaxs)){vrmaxs=rep(0,x1)}
@@ -52,7 +54,7 @@ lam0 <- eigen.analysis(meanmx)$lambda    # find the deterministic population gro
 # always assuming that all long-time-lag correlations are only
 # caused by within-year and one-time-step correlations
 #
-## Added corr.power OPTION for both matrix exponentiation or element by element
+# need function for simple matrix powers 
 "%^%" <- function(mat, pow)
 {
    result <- diag(nrow(mat))
@@ -63,11 +65,10 @@ lam0 <- eigen.analysis(meanmx)$lambda    # find the deterministic population gro
    }
    result
 }
-if(corr.power=="matrix")
-{
-  print('Calculating the multi-year correlation matrix using matrix power', quote=FALSE)
-}
-else{print('Calculating the multi-year correlation matrix using element by element power', quote=FALSE)}
+
+  print('Calculating the multi-year correlation matrix', quote=FALSE)
+
+
   M <- matrix(,yrspan*np,yrspan*np)  # initialize the big correlation matrix (M)
   for (ii in 1:yrspan)
   {
@@ -85,26 +86,12 @@ else{print('Calculating the multi-year correlation matrix using element by eleme
   	if (ii > jj)
         {
            expo <- ii-jj
-           if(corr.power=="matrix")
-           {
-              litmx <- litmx %^% expo
-           }
-           else
-           {
-              litmx <- litmx ^ expo
-           }
+           litmx <- litmx %^% expo
         }
   	if (ii < jj)
         {
            expo <- jj-ii
-           if(corr.power=="matrix")
-           {
-              litmx <- (t(litmx)) %^%expo
-           }
-           else
-           {
-              litmx <- (t(litmx)) ^ expo
-           }
+           litmx <- (t(litmx)) %^%expo
         }
 	for (ip in 1:np)
         {
@@ -124,15 +111,18 @@ else{print('Calculating the multi-year correlation matrix using element by eleme
 ## NOTE: this section will not be evaluated using matlab code in Box 8.10
 ##  since min(d) will always be > 0 if computed using complex input..
   checkeig <- min(d)	              # check for negative eigenvalues
-  if (checkeig < 0)
+
+ if (checkeig < 0)
   {
+        print('Correcting negative eigenvalues', quote=FALSE)
+
       maxneg <- abs(min(d[d<0]))      # the largest negative eigenvalue
       d[d <= maxneg] <- 0             # sets negatives and small positive values = 0
       d <- diag(d)
       newfullmx <- W %*% d %*% t(W)   # make a corrected matrix
-      for (ii in 1:np)                # change from covariances to correlations
-      { 
-  	  for (jj in 1:np)
+      for (ii in 1:np3)                # CORRECTION in email 8/4/07
+      {                                 ##change from covariances to correlations
+  	  for (jj in 1:np3)
           {
   	      if (newfullmx[ii,ii] == 0 | newfullmx[jj,jj] == 0)
               {

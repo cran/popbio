@@ -1,4 +1,4 @@
-head2<-function(x, head = 3, tail=1, dotrows=2)
+head2<-function(x, head = 3, tail=1, dotrows=1)
 {
    x <- format(rbind(head(x,head + dotrows), tail(x,tail)))
    if(dotrows>0)

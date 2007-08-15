@@ -1,7 +1,7 @@
 \name{projection.matrix}
 \alias{projection.matrix}
 
-\title{ Construct projection matrix models }
+\title{ Construct projection matrix models using transition frequency tables }
 \description{
   Construct an age or stage-structure projection model from a
   transition table listing stage in time \emph{t}, fate in time
@@ -34,12 +34,21 @@ projection.matrix(transitions, stage=NULL, fate=NULL,
   \item{TF}{ output separate transition (T) and fertility (F)
       matrices.  Default is to output single projection matrix A }
 }
-%\details{  }
+\details{ The state transition rates are estimated using transition
+frequency tables (see section 6.1.1, Caswell 2001), so this
+technique will most likely apply to demographic studies of plants or
+other sessile organisms where individuals are tagged and then
+consistently relocated in annual censuses.  The fertility rates are calculated by
+averaging individuals fertilities by stage class; therefore, some
+care should be taken to correctly estimate individual fertilities
+based on the timing of the census.
 
-\note{ Individual fertilities are the total number of offspring at the
+ }
+
+\note{ Individual fertilities should be the total number of offspring at the
   end of the census interval.  Therefore, fertilites should include
-  offspring survival in a prebreeding censuses.  In a postbreeding
-  census, new offspring were born just before the
+  offspring survival in a prebreeding censuses (and more than one offspring class may be present). 
+ In a postbreeding census, new offspring were born just before the
   census, so the fertility rate is just the number of offspring in
   this case.
 
@@ -61,6 +70,9 @@ data(test.census)
 
 trans <- subset(merge(test.census, test.census, by = "plant",   sort =FALSE), 
                     year.x==2001 & year.y==2002 )
+## Add individual fertilities using "anonymous reproduction"  based on the 
+## proportional reproductive outputs of flowering plants and the total number 
+## of seedlings at the end of the projection interval
 trans$seedferts <- trans$fruits.x/sum(trans$fruits.x) * 5
 
 stages<-c("seedling", "vegetative", "reproductive")
@@ -70,13 +82,18 @@ projection.matrix(trans, stage=stage.x, fate=stage.y, fertility=seedferts, sort=
 projection.matrix(trans, 3, 6, 8, c(3,4,2))
 projection.matrix(trans, "stage.x", "stage.y", "seedferts", stages)
 
-## or use column defaults
+## or use column defaults (fertility column (seedling) now matches stage class name)
 names(trans)[c(3, 6, 8)] <- c("stage", "fate", "seedling")
 # and order stages in dataframe
 trans$stage<-ordered(trans$stage, stages)
 
 projection.matrix(trans)
 projection.matrix(trans, TF=TRUE)
+
+## OR transition matrix
+prop.table(table( trans$fate, trans$stage),2)[stages,]
+##  first-row of fertility matrix
+tapply(trans$seedling, trans$stage, mean)
 
 ## Example using Aquilegia data
 data(aq.trans)

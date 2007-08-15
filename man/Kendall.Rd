@@ -64,5 +64,6 @@ tor.est
 
 data(woodpecker) 
 wp.est <- Kendall(woodpecker, grades=200)
+wp.est
 }
 \keyword{ survey }

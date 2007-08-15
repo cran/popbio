@@ -7,7 +7,7 @@
   viewing ordered datasets such as longitudinal census data.
 }
 \usage{
-head2(x, head = 3, tail = 1, dotrows = 2)
+head2(x, head = 3, tail = 1, dotrows = 1)
 }
 \arguments{
   \item{x}{ A matrix or dataframe, usually ordered by  }

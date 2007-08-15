@@ -22,7 +22,7 @@
   of small populations. Ecological Applications 2: 18-29.
 }
 \references{
-  Akçakaya, H. R. 2002. Estimating the variance of survival rates and
+  Akcakaya, H. R. 2002. Estimating the variance of survival rates and
   fecundities. Animal Conservation 5: 333-336.
 
   Kendall, B. E. 1998. Estimating the magnitude of environmental stochasticity

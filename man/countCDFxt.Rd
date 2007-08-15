@@ -47,7 +47,7 @@ Sinauer, Sunderland, Massachusetts, USA. }
 
 \examples{
 ## Return a graph like Figure 3.8 in Morris and Doak (2002: 84).
-
+## based on census counts of adult female grizzly bears, 1958-1998
 countCDFxt(mu=0.02134, sig2=0.01305, nt=38, tq=38, Nc=99, Ne=20)
 
 }

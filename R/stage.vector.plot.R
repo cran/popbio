@@ -1,4 +1,4 @@
-stage.vector.plot<-function(stage.vectors, proportions=TRUE, legend.coords="topright", ylim=NULL, xlab="Years", ylab=NULL, col=rainbow(12), ... )
+stage.vector.plot<-function(stage.vectors, proportions=TRUE, legend.coords="topright", ylim=NULL, xlab="Years", ylab=NULL, col=rainbow(8), ... )
 {
     p<-stage.vectors
     n<-dim(p)[1]                      #number of stage vectors

@@ -20,6 +20,8 @@
 data(test.census)
 
  test.stage <- c("seedling", "vegetative", "reproductive")
+
+## Cross-tabulate stage vectors and order rows by stage
 sv<- table(test.census$stage, test.census$year)[test.stage,]
 sv
 stage.vector.plot(sv)
@@ -29,41 +31,38 @@ stage.vector.plot(sv, prop=FALSE, xaxt="n")
  axis(1, 2001:2003, c(2001, 2002, 2003))
 
 
-## Convert to transitions using reshape
+## Convert census data to state-fate transition table using reshape
 
 reshape(test.census, direction="wide", idvar="plant", timevar="year")
 
 
-## Convert to transition table using merge
+## Convert census data  to state-fate transition table using merge
 
 trans <- subset(merge(test.census, test.census, by="plant", sort=FALSE), 
                year.x==year.y-1)
 trans
 
-## format column and row names
+## Format column and row names
 trans<-trans[,c(1:4,6)]
 colnames(trans)[2:5] <- c("year", "stage", "fruits", "fate")
 rownames(trans) <- 1:nrow(trans)
-# order stage and fate columns
+## Order stage and fate columns
 trans$stage <- ordered(trans$stage, levels = test.stage)
 trans$fate  <- ordered(trans$fate,  levels = c(test.stage,"dead"))
 
-##### Create projection matrix for 2001-2002 using prebreeding census with no seed bank
+## Select transitions for 2001-2002 and count offspring (seedlings)
 
 test.trans <- subset(trans, year==2001)
-
 seedlings<-nrow(subset(test.census, year==2002 & stage=="seedling"))
 
-## add individual fertilities using "anonymous reproduction"  based on the 
+## Add individual fertilities using "anonymous reproduction"  based on the 
 ## proportional reproductive outputs of flowering plants and the total number 
 ## of seedlings at the end of the projection interval
 
 test.trans$seedling<-test.trans$fruits/sum(test.trans$fruits) * seedlings
-
 test.trans
 
-
-####  Calculate state transition rates and build T matrix
+##  Create transition frequency table  and build T matrix
 
 tf<-table( test.trans$fate, test.trans$stage, dnn=c("fate","stage") )
 tf
@@ -71,8 +70,7 @@ tf
 T.mat<-prop.table(tf,2)[-4,]
 T.mat
 
-
-## summarize stage-specific fertility rates and build F matrix
+## Summarize stage-specific fertility rates and build F matrix
 
 fert<-tapply(test.trans$seedling, test.trans$stage, mean)
 fert
@@ -83,11 +81,9 @@ F.mat
 
 ## The final projection matrix is just
 
-
 T.mat+F.mat
 
-
-### OR use projection matrix function - 
+## OR use projection matrix function - 
 
 projection.matrix(test.trans)
 

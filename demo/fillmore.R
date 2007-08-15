@@ -358,7 +358,7 @@ abline(v=sum(sv.mean[-1]), lty=2)
 aq.ex.seed<-stoch.quasi.ext(fill.A, n0=sv.mean, Nx=1, nreps=500, sumweight=c(0,1,1,1,1))
 
 
-plot(aq.ex.seed[,1], xlab="Years", ylab="Quasi-extinction probability", type="n", ylim=c(0,max(aq.ex.seed)), main=paste("Time to reach a quasi-extinction\nthreshold of 1 above-ground individual using 96-02 matrices"))
+plot(aq.ex.seed[,1], xlab="Years", ylab="Quasi-extinction probability", type="n", ylim=c(0,max(aq.ex.seed)), main=paste("Time to reach a quasi-extinction threshold\nof 1 above-ground individual using 96-02 matrices"))
 for(i in 1:dim(aq.ex.seed)[2])
   {
     lines(aq.ex.seed[,i], col=rainbow(dim(aq.ex.seed)[2])[i])

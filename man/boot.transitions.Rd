@@ -50,7 +50,8 @@ test.trans<-test.trans[,c(1:4,6)]
 colnames(test.trans)[2:5] <- c("year", "stage", "fruits", "fate")
 rownames(test.trans) <- 1:nrow(test.trans)
 # order stage columns corresponding to matrix
-test.trans$stage <- ordered(test.trans$stage, levels = c("seedling", "vegetative", "reproductive"))
+test.trans$stage <- ordered(test.trans$stage, 
+                                  levels = c("seedling", "vegetative", "reproductive"))
 
 
 ## add individual fertilities using prebreeding census with no seed bank 

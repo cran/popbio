@@ -3,10 +3,7 @@
 \title{ Generate beta-distributed random numbers }
 \description{
   This function calculates a random number
-  from a beta distribution with mean mn, standard deviation
-  sd, and cum. distr. function fx.
-  This function uses the R function pbeta(x,vv,ww),
-  where x is the value of beta, v,w are beta parameters
+  from a beta distribution and uses the R function pbeta(x,vv,ww).
 }
 \usage{
 betaval(mn, sdev, fx=runif(1))
@@ -35,7 +32,7 @@ Sinauer, Sunderland, Massachusetts, USA. }
  adapted to R by Patrick Nantel, 20 June 2005.}
 
 %\note{}
-%\seealso{}
+\seealso{Beta Distribution \code{\link{rbeta}} }
 
 \examples{
 

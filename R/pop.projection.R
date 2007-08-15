@@ -16,6 +16,7 @@ pop.projection <- function(A,n,iterations=20)
  
 
    rownames(stage)<-rownames(A)                   ## and add row names.
+   colnames(stage)<-0:(t-1)                       ## start counting at zero?
     w <- stage[,t]                                ## Estimate stable stage from last size iteration
 
    pop.proj <- list(  

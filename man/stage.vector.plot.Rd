@@ -7,7 +7,7 @@
 }
 \usage{
 stage.vector.plot(stage.vectors, proportions=TRUE, legend.coords="topright", 
-        ylim=NULL, xlab="Years", ylab=NULL, col=rainbow(12),  ... )
+        ylim=NULL, xlab="Years", ylab=NULL, col=rainbow(8),  ... )
 }
  
 \arguments{
@@ -17,44 +17,34 @@ stage.vector.plot(stage.vectors, proportions=TRUE, legend.coords="topright",
   \item{ylim}{the y limits of the plot, defaults to min and max values in stage.vector.projections}
   \item{xlab}{a label for the x axis}
   \item{ylab}{a label for the y axis}
-  \item{col}{Vector of color names for line drawings.  Default is rainbow(12)}
+  \item{col}{Vector of color names for line drawings.  Default is rainbow(8)}
  
   \item{...}{additional options are passed to \code{\link{plot}} function}
 
 
 }
-\details{   A plot of stage class projections }
+\details{   A plot of stage or age class projections }
 \references{see section 2.2 in Caswell 2001 }
 \author{ Chris Stubben }
 
 \seealso{ see \code{\link{pop.projection}} }
 \examples{
 
-
-stages<-c("seedling", "vegetative", "flowering")
+## matrix from Example 2.1 in Caswell
 A<-matrix(c(
-0,     0,     6,
-0.4,  0.6,  0.02,
-0.01,0.2,  0.25
-), nrow=3, byrow=TRUE, 
-    dimnames=list(stages,stages) 
-)
+0, 0.3,   0,
+1,   0, 0.5,
+5,   0,   0
+), nrow=3, dimnames=list(1:3,1:3))
+n<-c(1,0,0)
+p<-pop.projection(A,n,60)
 
-n<-c(25,25,25)
-p<-pop.projection(A,n, 15)
-
-
-
-## change default rainbow colors
-stage.vector.plot(p$stage.vectors, col=2:4)
-stage.vector.plot(p$stage.vectors, col="gray")
-
-
-stage.vector.plot(p$stage.vectors, prop=FALSE, legend=c(1,300))
-## log scale
-stage.vector.plot(p$stage.vectors, prop=FALSE, log='y', 
-   legend="bottomright", ylab="Number in stage class (log scaled)")
-
+## Plots in Figure 2.3
+stage.vector.plot(p$stage.vector[,1:15], col='black', las=1, prop=FALSE)
+stage.vector.plot(p$stage.vector[,1:40], col=2:4, las=1)
+stage.vector.plot(p$stage.vector, col=2:4, prop=FALSE,
+ylim=c(.01, 10), log='y', legend="bottomright", yaxt='n')
+axis(2, at=c(.01, 0.1, 1,10), labels=expression(10^-2, 10^-1, 10^0, 10^1), las=1) 
 
 
 }

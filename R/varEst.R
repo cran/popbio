@@ -14,12 +14,12 @@ varEst <- function (rates,weighted=1)
     p <- m / N
     if (weighted == 0)
     {
-      demvar <- sum((p*(1 - p))/ N)/ nyrs # equ.2 of Akçakaya 2002: unweighted mean of demographic variance
+      demvar <- sum((p*(1 - p))/ N)/ nyrs # equ.2 of Akcakaya 2002: unweighted mean of demographic variance
       totalvar <- var(p, na.rm = TRUE)    # unweighted total variance of the vital rate
     }
     else
     {
-      demvar <- sum(p*(1 - p)) / sum(N)   # equ.3 of Akçakaya 2002: weighted average demographic variance
+      demvar <- sum(p*(1 - p)) / sum(N)   # equ.3 of Akcakaya 2002: weighted average demographic variance
       wmeanp <- sum(m) / sum(N)           # weighted mean of the vital rate
       totalvar <- sum(N * (p - wmeanp)^2) / sum(N) # weigthed total variance (Kendall 1998, eq. 1)
     }
