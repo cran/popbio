@@ -3,7 +3,7 @@
 
 \title{ Create a projection matrix for Aquilegia }
 \description{
-  Creates a projection matrix for \emph{Aquilegia} from annual transition data, assuming new seeds and seed bank seed have an equal chance for successful germination and equal survival rates.
+  Creates a projection matrix for \emph{Aquilegia} from annual transition data, assuming new seeds and seed bank seeds have an equal chance for successful germination and equal survival rates.
 }
 \usage{
 aq.matrix(trans, recruits, summary = TRUE, seed.survival = 0.126,
@@ -36,7 +36,7 @@ seed.bank.size = 10000, seeds.per.fruit = 120, ...)
   \item{n1}{final population vector}
 
 If summary is FALSE, a data frame with individual fertilities added
-  to the transition data frame. 
+  to the transition data frame only. 
 
 }
 

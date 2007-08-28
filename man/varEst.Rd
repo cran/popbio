@@ -5,7 +5,7 @@
 \description{
   This function finds the best estimates of mean and environmental
   variance for beta-binomial vital rates, using the approximation
-  method of Akçakaya (2002). 
+  method of Akcakaya (2002). 
 }
 \usage{
 varEst(rates, weighted=1)
@@ -24,7 +24,7 @@ varEst(rates, weighted=1)
   (2) estimate of variance due to demographic stochasticity, and
   (3) estimate of variance due to environmental stochasticity.
 }
-\references{Akçakaya, H. R. 2002. Estimating the variance of survival rates and
+\references{Akcakaya, H. R. 2002. Estimating the variance of survival rates and
   fecundities. Animal Conservation 5: 333-336.
 
   Kendall, B. E. 1998. Estimating the magnitude of environmental stochasticity

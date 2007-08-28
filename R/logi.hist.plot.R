@@ -33,9 +33,9 @@ xlab = x.lab, cex.lab = 1.2, las = las)
 indep.1 <- independ[depend == 1]
 indep.0 <- independ[depend == 0]
 boxplot(indep.1, horizontal = TRUE, add = TRUE,
-at = 1.05, boxwex = 0.1, col = col.box, notch = T)
+at = 1.05, boxwex = 0.1, col = col.box, notch = TRUE)
 boxplot(indep.0, horizontal = TRUE, add = TRUE,
-at = -0.05, boxwex = 0.1, col = col.box, notch = T)
+at = -0.05, boxwex = 0.1, col = col.box, notch = TRUE)
 }
 
 # fit binomial glm and add predicted curve; you could

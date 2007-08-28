@@ -38,25 +38,25 @@ Sinauer, Sunderland, Massachusetts, USA.
 
 %\seealso{ \code{\link{vitalsim}}}
 \examples{
-  data(whale)
-  multiresultm(c(1,9,9,9),whale$T, whale$F,varF=NULL)
- multiresultm(c(1,9,9,9),whale$T, whale$F,varF=NULL)
+data(whale)
+multiresultm(c(1,9,9,9),whale$T, whale$F,varF=NULL)
+multiresultm(c(1,9,9,9),whale$T, whale$F,varF=NULL)
 
 ## create graph similar to Fig 15.3 a
-  reps <- 10    # number of trajectories
-  tmax <- 200   # length of the trajectories
-  totalpop <- matrix(0,tmax,reps)  # initializes totalpop matrix to store trajectories
-  nzero <- c(1,1,1,1) # starting population size
-  for (j in 1:reps) 
-  {
-    n <- nzero
-    for (i in 1:tmax) 
-    {
+reps <- 10    # number of trajectories
+tmax <- 200   # length of the trajectories
+totalpop <- matrix(0,tmax,reps)  # initializes totalpop matrix to store trajectories
+nzero <- c(1,1,1,1) # starting population size
+for (j in 1:reps) 
+{
+   n <- nzero
+   for (i in 1:tmax) 
+   {
       n <- multiresultm(n,whale$T,whale$F,varF=NULL)
       totalpop[i,j] <- sum(n)
-    } 
-  } 
-  matplot(totalpop, type = 'l', log="y",
-          xlab = 'Time (years)', ylab = 'Total population')
+   } 
+} 
+matplot(totalpop, type = 'l', log="y",
+        xlab = 'Time (years)', ylab = 'Total population')
 }
 \keyword{survey}

@@ -8,13 +8,14 @@
 \usage{data(teasel)}
 \format{
   A list with T and F matrices 
-  }
 }
 \source{
    Example 5.2
 }
 \references{
-   Caswell 2001.  Matrix Population Models.  Second edition.
+Caswell, H. 2001. Matrix population models: construction, analysis,
+and interpretation, Second edition. Sinauer, Sunderland,
+Massachusetts, USA.
 }
 \examples{
 data(teasel)
@@ -26,11 +27,12 @@ tea$lambda
 # fertility in a prebreeding census for a monocarpic plant is in last column.
 elas<-tea$elasticities
 elas
-el<-c(fertility=sum(elas[,6]), stasis=sum(diag(elas)), growth=sum(elas[row(elas)>col(elas)]))
+el<-c(fertility=sum(elas[,6]), stasis=sum(diag(elas)), 
+         growth=sum(elas[row(elas)>col(elas)]))
 el
 
 tea$sensitivities
-# Matrix plots like figure 9.4 in Caswell.  No decent 3d barplot in R yet.  Note log10 scale
+# Matrix plots like figure 9.4 in Caswell.  No 3d barplot in R yet.  Note log10 scale.
 op<-par(oma=c(1,2,4,0))
 heatmap(log10(tea$sensitivities[6:1, ]), Rowv = NA, 
     Colv = NA, scale = "none", margin = c(8,8), 
@@ -43,7 +45,8 @@ par(op)
 plot(log10(c(tea$sensitivities)), type="s", ylim=c(-5,2),
 xlab="Stage", ylab=expression(paste(Log[10], " sensitivity of ", lambda)), xaxt="n")
 axis(1, seq(1,36,6), 1:6)
-text(log10(c(tea$sensitivities)), labels=paste(" ", 1:6, rep(1:6,each=6), sep=""), cex=.7, pos=3)
+text(log10(c(tea$sensitivities)), cex=.7, pos=3, 
+     labels=paste(" ", 1:6, rep(1:6,each=6), sep=""))
 
 
 }

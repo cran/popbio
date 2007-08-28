@@ -6,7 +6,7 @@ x3<-dim(corrin)[1]
 ## calcualte np and np2 
 np<-x3
 np2<-x1-x3
-np3 <- np*yrspan   ## correction in email from Doak 8/4/07
+np3 <- np*yrspan   ## CORRECTION in email from Doak 8/4/07
 
 ## create some reasonable defaults if not specified
  if(missing(vrmins)){vrmins=rep(0,x1)}

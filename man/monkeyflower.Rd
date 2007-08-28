@@ -3,9 +3,11 @@
 \docType{data}
 \title{Projection matrices for monkeyflower}
 \description{
-  Pooled and annual projection matrices of central and marginal populations of monkeyflowers (\emph{Mimulus cardinalis} and \emph{M. lewisii)}}
-
+  Pooled and annual projection matrices of central and marginal
+  populations of monkeyflowers (\emph{Mimulus cardinalis} and
+  \emph{M. lewisii})
 }
+
 \usage{data(monkeyflower)}
 \format{
   A data frame with 32 projection matrices, arranged with one matrix per row
@@ -32,32 +34,29 @@
   }
 }
 \details{
- Matrix constructed using a post-breeding census with four stage classes: Seeds, small non-reproductive, large non-reproductive, and reproductive.
+ Matrix constructed using a post-breeding census with four stage
+ classes: Seeds, small non-reproductive, large non-reproductive, and
+ reproductive.
+
 }
 \source{
   \url{http://www.esapubs.org/archive/ecol/E087/126/appendix-E.htm}
 }
 \references{
-   Amy Lauren Angert. 2006. Demography of central and marginal populations of monkeyflowers (\emph{Mimulus cardinalis} and \emph{M. lewisii}). Ecology 87:2014-2025.
-
+   Amy Lauren Angert. 2006. Demography of central and marginal
+   populations of monkeyflowers (\emph{Mimulus cardinalis} and
+   \emph{M. lewisii}). Ecology 87:2014-2025.
 }
 \examples{
 data(monkeyflower)
-
 A <- subset(monkeyflower, 
            species=="cardinalis" & site=="Carlon" & year=="pooled",  
            select=c(4:19))
-
 stages<-c("seed", "sm.nr", "lg.nr", "repro")
-
 A <- matrix(unlist(A), nrow=4, byrow=TRUE, dimnames=list(stages, stages) )
-
 A
-
 eigen.analysis(A)
-
 ## mean matrix growth rate
 eigen.analysis(matrix(apply(monkeyflower[,4:19], 2, mean), nrow=4))$lambda
-
 }
 \keyword{datasets}

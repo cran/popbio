@@ -2,8 +2,11 @@
 \alias{pfister.plot}
 \title{ Create log-log plots of variance vs. sensitivity and CV vs. elasticity }
 \description{
-  Create log-log plots of both variance vs. sensitivity and CV vs. elasticity in matrix elements.  Plots are based on Figure 2 in Pfister(1998).    }
+  Create log-log plots of both variance vs. sensitivity and CV
+  vs. elasticity in matrix elements.  Plots are based on Figure 2 in
+  Pfister(1998).
 }
+
 \usage{
 pfister.plot(A)
 }
@@ -11,16 +14,20 @@ pfister.plot(A)
 \arguments{
   \item{A}{ A list of two or more annual projection matrices  }
 }
-\details{   Calculates mean, variance and coefficient of variation (CV) of matrix elements from a list of two or more projection matrices.  The sensitivity and elasticity matrices are then calculated from the mean matrix using \code{\link{eigen.analysis}}
-
+\details{   Calculates mean, variance and coefficient of variation
+  (CV) of matrix elements from a list of two or more projection
+  matrices.  The sensitivity and elasticity matrices are then
+  calculated from the mean matrix using \code{\link{eigen.analysis}}
 }
-\value{
-Creates two log-log plots similar to Figure 2 in Pfister(1998) and outputs a data.frame with 5 columns listing mean, variance, CV, sensitivity and elasticity for matrix elements with a mean and variance > 0. 
+\value{ Creates two log-log plots similar to Figure 2 in Pfister(1998)
+  and outputs a data.frame with 5 columns listing mean, variance, CV,
+  sensitivity and elasticity for matrix elements with a mean and
+  variance > 0. 
 }
 \references{
-Pfister, CA.  1998. Patterns of variance in stage-structured populations: Evolutionary predictions and ecological implications.  PNAS 95:213-218.
-
-
+Pfister, CA.  1998. Patterns of variance in stage-structured
+populations: Evolutionary predictions and ecological implications.
+PNAS 95:213-218.
 }
 \author{ Chris Stubben }
 
@@ -58,9 +65,5 @@ text(vr1$cv, vr1$elas, y2)
 a<-cor.test(vr1$cv, vr1$elas, method="spearman")
 a
 text(10, .0015, substitute(rho == x, list(x=round(a$estimate,2))), col="blue")
-
-
-
-
 }
 \keyword{ survey }

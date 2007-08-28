@@ -10,7 +10,7 @@ eigen.analysis<-function(A, zero=TRUE)
     
     W <- ev$vectors
     w <- abs(Re(W[, lmax]))
-    ## check if matrix is singular
+    ## check if matrix is singular-and output NAs rather than stop (better for loops and  bootstrap)
     V <- try(Conj(solve(W)), silent=TRUE)
     if (class(V) == "try-error") {
       eigen.analysis <- list(lambda = lambda, stable.stage = w/sum(w), 
