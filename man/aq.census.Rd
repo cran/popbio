@@ -32,16 +32,9 @@ complete census data from 1995-2006.
 \seealso{ \code{\link{aq.trans}} for annual transitions with stage and fate in same row }
 \examples{
 data(aq.census)
-
 sv<-table(aq.census$status, aq.census$year)
-
-
-
 sv
-
 stage.vector.plot(sv[-1,], prop=FALSE)
-
-
 }
 \keyword{datasets}
 

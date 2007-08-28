@@ -29,6 +29,13 @@
 projections }
 }
 
+\bold{Chapter 9}
+\describe{
+\item{ \code{\link{vitalsens}} }{  Box 9.1. Vital rate sensitivity and
+  elasticity}
+}
+
+
 
 }
 

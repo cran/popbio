@@ -46,9 +46,9 @@ The \link{whale} dataset includes code to calculate age-specific survival and fe
 \item{ \code{\link{QPmat}} }{ section 6.2.2.  Construct a projection
     matrix from a time series of  individuals per stage using Wood's
     quadratic programming method.  Requires \code{quadprog} library.}
-
 }
-See the \code{Rcapture} package for capture-recapture methods described in section 6.1.2.
+See the \code{Rcapture} package for capture-recapture methods
+described in section 6.1.2. 
 
 \bold{Chapter 9}.  Sensitivity analysis
 \describe{
@@ -56,11 +56,20 @@ See the \code{Rcapture} package for capture-recapture methods described in secti
     Calculate sensitivities and elasticities.  The examples in the
     \link{teasel} and \link{tortoise} datasets also include code to
     sum elasticities and create figures like 9.3, 9.4, and 9.11. }
-
 }
+See the \code{secder} function in the \code{demogR} package for second derivatives of eigenvalues
+described in section 9.7 
 
-See the \code{demogR} package for the second derivative function described in section 9.7.
-
+\bold{Chapter 14}.  Environmental stochasticity
+\describe{
+\item{ \code{\link{stoch.growth.rate}} }{ section 14.3.  Calculate the
+    log stochastic growth rate by simulation and Tuljapukar's approximation  }
+\item{ \code{\link{stoch.projection}} }{  section 14.5.3.  Project
+    stochastic growth from a sequence of matrices in a uniform and
+    nonuniform environment }
+}
+See the \code{stoch.lams} function in the \code{demogR} package for senstivity and elasticity of log
+stochastic growth rate described in section 14.4.   
 
 \bold{Chapter 15}.  Demographic stochasticity
 \describe{
@@ -69,8 +78,9 @@ See the \code{demogR} package for the second derivative function described in se
     example uses the \link{whale} dataset to create a plot like figure
     15.3. }
 
-
 }
+
+
 
 
 

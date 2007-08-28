@@ -57,6 +57,6 @@ A <- matrix(unlist(A), nrow=4, byrow=TRUE, dimnames=list(stages, stages) )
 A
 eigen.analysis(A)
 ## mean matrix growth rate
-eigen.analysis(matrix(apply(monkeyflower[,4:19], 2, mean), nrow=4))$lambda
+eigen.analysis(matrix(apply(monkeyflower[,4:19], 2, mean), nrow=4))$lambda1
 }
 \keyword{datasets}

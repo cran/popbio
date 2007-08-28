@@ -25,7 +25,7 @@ A<-tortoise$T + tortoise$F.med.high
 A
 
 tor<-eigen.analysis(A, zero=FALSE)
-tor$lambda
+tor$lambda1
 
 ## All 4 growth rates (first add T to all four F matrices)
 tor4<-lapply(tortoise[2:5], "+", tortoise$T)

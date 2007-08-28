@@ -43,9 +43,25 @@ data(aq.trans)
 head(aq.trans,3)
 
 sv<-table(aq.trans$stage, aq.trans$year)
+addmargins(sv)
 
-sv
+stage.vector.plot(sv[-1,], prop=FALSE)
 
+### plot proportions
+
+#stage.vector.plot(sv[-1,], ylim=c(0,1), col=rainbow(4))
+
+op<-par(mar=c(5,4,2,7))
+x<-barplot(prop.table(sv[-1,],2), las=1,
+xlab="Year", ylab="Proportion in stage class", 
+col=rainbow(4), ylim=c(0,1), xaxt='n', space=.5)
+box()
+yrs<-substr(colnames(sv),3,4)
+axis(1,x, yrs)
+## draw outside plot boundaries
+par(xpd=TRUE) 
+legend(13,0.7, rev(rownames(sv)[-1]), fill=rev(rainbow(4)))
+par(op)
 
 
 }

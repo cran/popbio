@@ -19,11 +19,12 @@ eigen.analysis(A, zero=TRUE)
   section 9.1, and elasticities in section 9.2}
 
 \note{ If matrix A is singular,  then \code{eigen.analysis} will return
-  elasticities, sensitivities, and reproductive values  with  NAs}
+  elasticities, sensitivities, and reproductive values  with  NAs.
+  This function is also included in \code{demogR} package.}
 
 \value{
 A list with 6 items
-    \item{lambda }{dominant eigenvalue}
+    \item{lambda1 }{dominant eigenvalue}
     \item{stable.stage}{proportional stable stage distribution}
     \item{sensitivities }{matrix of eigenvalue sensitivities}
     \item{elasticities}{matrix of eigenvalue elasticities}
@@ -33,7 +34,9 @@ A list with 6 items
 \references{
 Caswell, H. 2001. Matrix population models: construction, analysis, and interpretation, Second edition. Sinauer, Sunderland, Massachusetts, USA.
  }
-\author{ Original code by  James Holland Jones, Stanford University, Department of Anthropological Sciences, 12 August 2005 at \url{http://popstudies.stanford.edu/summer_course/} 
+\author{ Original code by  James Holland Jones, Stanford University,
+  Department of Anthropological Sciences, 12 August 2005 at
+  \url{http://popstudies.stanford.edu/summer_course/. } 
  }
 
 \seealso{ \code{\link{projection.matrix}} to construct matrix model}

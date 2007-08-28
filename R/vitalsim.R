@@ -22,7 +22,7 @@ vrs <- vrmeans
 meanmx<-makemx(vrs)                      # create mean matrix using function
 #
 Nstart <- sum(n0)	                 # starting population number
-lam0 <- eigen.analysis(meanmx)$lambda    # find the deterministic population growth rate (mean matrix)
+lam0 <- eigen.analysis(meanmx)$lambda1    # find the deterministic population growth rate (mean matrix)
 #-------------------------------------------------------------------------------
 # this section makes sets of beta or strecthed beta values to choose
 # from during the simulations. It makes 99 values for 1

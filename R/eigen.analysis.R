@@ -13,7 +13,7 @@ eigen.analysis<-function(A, zero=TRUE)
     ## check if matrix is singular-and output NAs rather than stop (better for loops and  bootstrap)
     V <- try(Conj(solve(W)), silent=TRUE)
     if (class(V) == "try-error") {
-      eigen.analysis <- list(lambda = lambda, stable.stage = w/sum(w), 
+      eigen.analysis <- list(lambda1 = lambda, stable.stage = w/sum(w), 
         sensitivities = A*NA, elasticities = A*NA, repro.value = w*NA, 
         damping.ratio = dr[1]/abs(dr[2]))
                            }
@@ -29,7 +29,7 @@ eigen.analysis<-function(A, zero=TRUE)
     dimnames(s) <- x
     names(w) <- x[[1]]
     names(v) <- x[[1]]
-    eigen.analysis <- list(lambda = lambda, stable.stage = w/sum(w), 
+    eigen.analysis <- list(lambda1 = lambda, stable.stage = w/sum(w), 
         sensitivities = s, elasticities = e, repro.value = v/v[1], 
         damping.ratio = dr[1]/abs(dr[2]))
   }

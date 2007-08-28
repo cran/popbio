@@ -46,8 +46,10 @@ A<-matrix(c(
 n<-c(5,5,5)
 p<-pop.projection(A,n, 15)
 p
-stage.vector.plot(p$stage.vectors, col=2:4)
 eigen.analysis(A)$damping.ratio
+stage.vector.plot(p$stage.vectors, col=2:4)
+
+
 ####
 
 data(whale)

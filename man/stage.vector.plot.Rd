@@ -14,7 +14,7 @@ stage.vector.plot(stage.vectors, proportions=TRUE, legend.coords="topright",
   \item{stage.vectors}{ a matrix listing stage class vectors in columns}
   \item{proportions}{ plot proportional changes or total numbers, defaults to proportions. }
   \item{legend.coords}{ a \code{\link{legend}} keyword or vector of x,y coordinates, defaults to top-right corner }
-  \item{ylim}{the y limits of the plot, defaults to min and max values in stage.vector.projections}
+  \item{ylim}{the y limits of the plot, defaults to min and max values in stage.vectors}
   \item{xlab}{a label for the x axis}
   \item{ylab}{a label for the y axis}
   \item{col}{Vector of color names for line drawings.  Default is rainbow(8)}
@@ -45,7 +45,6 @@ stage.vector.plot(p$stage.vector[,1:40], col=2:4, las=1)
 stage.vector.plot(p$stage.vector, col=2:4, prop=FALSE,
 ylim=c(.01, 10), log='y', legend="bottomright", yaxt='n')
 axis(2, at=c(.01, 0.1, 1,10), labels=expression(10^-2, 10^-1, 10^0, 10^1), las=1) 
-
 
 }
 \keyword{ survey }

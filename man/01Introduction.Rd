@@ -20,10 +20,13 @@ individuals using transition frequency tables.  To estimate vital
 rates in animal demography using capture-recapture methods, try the
 \code{Rcapture} package instead.
 
-Finally, the package includes a number of plotting methods and
-sample datasets consisting of either published projection matrices or
-annual census data from demography studies.
-
+The package also includes plotting methods and sample datasets
+consisting of either published projection matrices or annual census
+data from demography studies.  Two sample demonstrations
+illustrate some of the package capabilities, \code{demo(fillmore)} and
+\code{demo(stage.classify)}.  Finally, a description of the package
+in the Journal of Statistical Software is available at
+\url{http://www.jstatsoft.org/v22/i11}.  
 }
 
 \references{ 

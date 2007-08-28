@@ -1,0 +1,80 @@
+New features by version.
+
+#############
+
+changes in version 1.1.3
+
+* added function vitalsens for vital rate sensitivities and
+  elasticities 
+
+* added matplots to teasel example
+
+* changed name of lambda to lambda1 in eigen.analysis output to match
+  package demogR (in case demogR is loaded after popbio, then
+  functions using eigen.analysis should still work - unless matrix is
+  singular)
+
+
+#############
+
+changes in version 1.1.2
+
+* fixed undefined nyrs variable in varEst
+
+* added checks to head2 function to work with matrix or dataframe
+  input only 
+
+* removed extra brackets, foreign language encodings (Akcakaya) in .Rd
+  files requested by JSS editors
+
+#############
+
+changes in version 1.1.1 
+
+
+* added pfister.plot to create log-log plots of variance
+  vs. sensitivity and CV vs. elasticity
+
+* added more plotting examples (fig 9.3, 9.4, 9.11) from chap 9 in
+  Caswell to teasel and tortoise datasets
+
+* added age-specific survival and fertility curves (fig 5.1 and 5.2)
+  to whale dataset
+
+* corrected errors in hudcorr matrices and vitalsim function suggested
+  by Doak in email dated 8/4/07.
+
+* added plot based on fig 8.3 to vitalsim function and code (not run)
+  to simulate no correlations or only within-year correlations
+
+* changed colors in stage.vector.plot to rainbow(8)
+
+* added column names to boot.transitions (vector and matrix output,
+  e.g., a11, a21, a31 a12, ...) and pop.projection  output 
+ 
+* changed stage.vector.plot examples to project matrix in example 2.1
+  in Caswell and create figure 2.3.
+
+###################
+Changes in version 1.1
+
+* added many new functions and datasets contirubted by Patrick Nantel
+
+* added default row and column names (if missing) to stage.vector.plot,
+  checks for matrix with 2 or more stages, and repeat
+  colors if necessary
+
+* now checking if matrix is singular in eigen.analysis.  If matrix is
+  singular, NA values are used instead of exiting with a warning.
+  This is useful for bootstrapping that may create singular matrices
+  (and you don't wnat to exit with error if calcuting
+  elasticities/sensitivies or other bootstrap parameter).  Also set
+  lmax =1 if matrices return two identical dominant eigenvalues (need
+  example?)
+
+* added print statements on long loops used in all three  stochastic growth  functions to track progress
+ 
+* now rounding stages in vector before checking extinction probability
+  in stoch.quasi.ext.  Now if vector is (.3,.4,.4) and ext prob=1 then
+  rounding stages sets n=0.
+

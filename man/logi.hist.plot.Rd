@@ -45,7 +45,7 @@ aq.trans$survived<-aq.trans$fate!="dead"
 a<-subset(aq.trans, leaf<50 & stage!="recruit", c(leaf,survived))
 
 logi.hist.plot(a$leaf,  a$survived, 
-type="hist", boxp=FALSE, counts=TRUE, las.h=0, int=10, 
+type="hist", boxp=FALSE, counts=TRUE, int=10, 
 ylabel="Survival probability", ylabel2="Number of plants", 
  xlab="Number of leaves" )
 

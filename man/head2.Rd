@@ -10,7 +10,7 @@
 head2(x, head = 3, tail = 1, dotrows = 1)
 }
 \arguments{
-  \item{x}{ A matrix or dataframe, usually ordered by  }
+  \item{x}{ A matrix or dataframe }
   \item{head}{ The number of first rows }
   \item{tail}{ The number of last rows }
   \item{dotrows}{ The number of rows of dots }
