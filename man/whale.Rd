@@ -7,10 +7,14 @@
 }
 \usage{data(whale)}
 \format{
-  A list with T and F matrices 
+  A list with three elements. Transition matrix T, Fertility matrix F, and pod-specific matrices. 
 }
 \source{
- see Chapter 5 in Caswell (2001)
+  T and F matrices from Example 5.1 in Caswell (2001) and pod-specific
+  projection matrices (arranged by rows) based on pod-specific matrix
+  elements in the appendix of Brault and Caswell (1993).
+
+
 }
 \references{
 Brault, S., and H. Caswell. 1993. Pod-specific demography of killer
@@ -25,9 +29,15 @@ Massachusetts, USA.
 data(whale)
 A <- whale$T + whale$F
 A
-n <- c(4, 38, 36, 22)
+eigen.analysis(A)$lambda1
+
+## Individual pod
+A1<-matrix(whale$pod$L01, nrow=4, byrow=TRUE)
+eigen.analysis(A1)$lambda1
+
 
 ## matrix multiplication (see pop.projection)
+n <- c(4, 38, 36, 22)
 A \%*\% n
 A \%*\% A \%*\% n
 
@@ -51,7 +61,7 @@ mp<-function(A,pow){
   A
 }
 
-## also use colSums for sum of matrix columns e^T
+## use colSums for sum of matrix columns e^T
 surv<-matrix(numeric(150*4), ncol=4)
 for(x in 1:150)
 {

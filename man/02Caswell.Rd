@@ -24,13 +24,9 @@
 \item{ \code{\link{fundamental.matrix}} }{   section 5.3.1.
     Calculate age-specific survival from a stage classified matrix
     using the fundamental matrix N }
-
-
-
 \item{ \code{\link{net.reproductive.rate}} }{   section 5.3.4.
     Calculate the net reproductive rate of a stage classified matrix
     using the dominant eigenvalue of the matrix R.  }
-
 \item{ \code{\link{generation.time}} }{ section 5.3.5.   Calculate the
     generation time of a stage-classified matrix  }
 
@@ -42,7 +38,6 @@ The \link{whale} dataset includes code to calculate age-specific survival and fe
 \item{ \code{\link{projection.matrix}} }{ section 6.1.1.  Estimate
     vital rates and construct a projection matrix using transtion
     frequency tables}
-
 \item{ \code{\link{QPmat}} }{ section 6.2.2.  Construct a projection
     matrix from a time series of  individuals per stage using Wood's
     quadratic programming method.  Requires \code{quadprog} library.}
@@ -59,6 +54,14 @@ described in section 6.1.2.
 }
 See the \code{secder} function in the \code{demogR} package for second derivatives of eigenvalues
 described in section 9.7 
+
+\bold{Chapter 10}.  Life Table Response Experiments
+\describe{
+\item{ \code{\link{ltre}} }{ section 10.1 and 10.2.  Fixed designs in
+    LTREs.  The example includes code for variance
+    decomposition in random design. }
+
+}
 
 \bold{Chapter 14}.  Environmental stochasticity
 \describe{

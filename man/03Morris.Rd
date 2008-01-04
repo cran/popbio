@@ -1,7 +1,7 @@
 \name{03.Morris}
 \alias{03.Morris}
 \alias{Morris}
-\title{Converted Matlab functions from Morris and Doak(2002)} 
+\title{Converted Matlab functions from Morris and Doak (2002)} 
 \description{ 
 \bold{Chapter 3}
 \describe{

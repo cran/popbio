@@ -1,4 +1,25 @@
 New features by version.
+#############
+
+changes in version 1.1.5
+
+* added ltre function for fixed LTRE.  A random design is included in the
+  example
+
+* added calathea dataset for tropical understory herb in Horvitz and
+  Schemske (1995)
+
+* fix damping ratio in eigen.analysis.  Now the function finds the
+  second largest modulus  and not just modulus of the second eigenvalue ( in case
+  of eigenvalues with equal magnitudes in imprimitive matrices).
+  Also, added which.max to find dominant eigenvalue instead of
+   which(Re(ev$values)==max(Re(ev$values))).   
+
+#############
+
+changes in version 1.1.4
+
+* fixed error in image plot on teasel example
 
 #############
 
@@ -30,7 +51,6 @@ changes in version 1.1.2
 #############
 
 changes in version 1.1.1 
-
 
 * added pfister.plot to create log-log plots of variance
   vs. sensitivity and CV vs. elasticity
@@ -67,10 +87,8 @@ Changes in version 1.1
 * now checking if matrix is singular in eigen.analysis.  If matrix is
   singular, NA values are used instead of exiting with a warning.
   This is useful for bootstrapping that may create singular matrices
-  (and you don't wnat to exit with error if calcuting
-  elasticities/sensitivies or other bootstrap parameter).  Also set
-  lmax =1 if matrices return two identical dominant eigenvalues (need
-  example?)
+  (and you don't want to exit with error if calculating
+  elasticities/sensitivies or other bootstrap parameter).  
 
 * added print statements on long loops used in all three  stochastic growth  functions to track progress
  

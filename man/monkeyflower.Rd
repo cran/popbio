@@ -53,10 +53,19 @@ A <- subset(monkeyflower,
            species=="cardinalis" & site=="Carlon" & year=="pooled",  
            select=c(4:19))
 stages<-c("seed", "sm.nr", "lg.nr", "repro")
-A <- matrix(unlist(A), nrow=4, byrow=TRUE, dimnames=list(stages, stages) )
 A
-eigen.analysis(A)
-## mean matrix growth rate
-eigen.analysis(matrix(apply(monkeyflower[,4:19], 2, mean), nrow=4))$lambda1
+class(A)
+
+## Convert dataframe to matrix or vector first -either one works 
+## matrix(as.matrix(A), nrow=4, byrow=TRUE, dimnames=list(stages, stages) )
+A <-matrix(unlist(A), nrow=4, byrow=TRUE, dimnames=list(stages, stages) )
+A
+a<-eigen.analysis(A)
+a
+
+barplot(a$stable.stage, col="green", ylim=c(0,1), 
+       ylab="Stable stage proportion", xlab="Mimulus stage class")
+box()
+
 }
 \keyword{datasets}

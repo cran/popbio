@@ -10,64 +10,87 @@ eigen.analysis(A, zero=TRUE)
 }
 
 \arguments{
-  \item{A}{ a projection matrix }
+  \item{A}{ A projection matrix }
   \item{zero}{ Set sensitivities for unobserved transitions to zero }
 }
-\details{ The calculation of eigenvalues and eignvectors in Matlab is
-  listed in section 4.8.1 (p. 107) in Caswell (2001).  In addition,
-  the damping ratio is described in section 4.7.1, sensitivities in
-  section 9.1, and elasticities in section 9.2}
+\details{ The calculation of eigenvalues and eigenvectors partly follows
+  Matlab code in section 4.8.1 (p. 107) in Caswell (2001). 
+   
+  The built-in \code{\link{eigen}} function returns eigenvalues in descreasing
+order of magnitude or modulus.  The dominant eigenvalue of imprimitive
+matrices with \emph{d} eigenvalues of equal modulus is the one with the
+largest real part (\code{which.max(Re(eigen(A)$values))} ). The damping
+ratio is calculated by dividing the dominant eigenvalue by the second
+largest modulus (\code{\link{Mod}}).
+ }
 
-\note{ If matrix A is singular,  then \code{eigen.analysis} will return
-  elasticities, sensitivities, and reproductive values  with  NAs.
-  This function is also included in \code{demogR} package.}
+\note{ If matrix A is singular, then \code{eigen.analysis} will return
+  elasticities, sensitivities, and reproductive values with
+  NAs. 
+
+  This function is also included in \code{demogR} package.
+}
 
 \value{
 A list with 6 items
-    \item{lambda1 }{dominant eigenvalue}
+    \item{lambda1 }{dominant eigenvalue with largest real part }
     \item{stable.stage}{proportional stable stage distribution}
     \item{sensitivities }{matrix of eigenvalue sensitivities}
     \item{elasticities}{matrix of eigenvalue elasticities}
     \item{repro.value}{reproductive value scaled so v[1]=1}
-    \item{damping.ratio}{dominant eigenvalue divided by second largest eigenvalue}
+    \item{damping.ratio}{damping ratio  }
 }
 \references{
-Caswell, H. 2001. Matrix population models: construction, analysis, and interpretation, Second edition. Sinauer, Sunderland, Massachusetts, USA.
+Caswell, H. 2001. Matrix population models: construction, analysis,
+and interpretation, Second edition. Sinauer, Sunderland,
+Massachusetts, USA.
+
  }
 \author{ Original code by  James Holland Jones, Stanford University,
   Department of Anthropological Sciences, 12 August 2005 at
   \url{http://popstudies.stanford.edu/summer_course/. } 
  }
 
-\seealso{ \code{\link{projection.matrix}} to construct matrix model}
+\seealso{ \code{\link{eigen}} and \code{\link{pop.projection}} }
 \examples{
+
+## Imprimitive matrix
+A<-matrix(c(0,0,2,.3,0,0,0,.6,0), nrow=3,byrow=TRUE)
+A
+ev <- eigen(A)
+ev$values
+Mod(ev$values)
+lmax<-which.max(Re(ev$values))
+lmax
+Re(ev$values)[lmax]
+## damping ratio is NA 
+eigen.analysis(A)
+## cycles every 3 years
+stage.vector.plot(pop.projection(A, c(1,1,1), 10)$stage.vectors)
+
+
+### Whale
 
 data(whale)
 whaleA<-whale$T+whale$F
-
 a<-eigen.analysis(whaleA)
-
 a
-
 ymax<-max(a$repro.value)*1.25
 barplot(a$repro.value, col="blue", ylim=c(0,  ymax ), xpd=FALSE, 
        ylab="Reproductive value", xlab="Killer whale stage class")
 box()
 
-## display sensitititivies of "impossible" transitions 
+## display sensitivities of "impossible" transitions 
 ## (postreprod -> juvenile, yearling -> mature, etc)
 eigen.analysis(whaleA, zero=FALSE)$sensitivities
 
+### Teasel
 data(teasel)
 teaselA<-teasel$T + teasel$F
-
-
 a<-eigen.analysis(teaselA)
 a
 barplot(a$stable.stage, col="green", ylim=c(0,1), 
        ylab="Stable stage proportion", xlab="Teasel stage class")
 box()
-
-
 }
 \keyword{ survey }
