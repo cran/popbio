@@ -1,4 +1,4 @@
-ltre <-
+LTRE <-
 function(trts, ref)
 {
   ## treatments can be a single matrix or a list of matrices

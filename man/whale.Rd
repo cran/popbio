@@ -68,6 +68,8 @@ for(x in 1:150)
    surv[x,]<-colSums(mp(whale$T,x))
 }
 ## Just plot first stage column?
+
+
 plot(surv[,1]/surv[1,1], type="l", ylim=c(0,1), las=1, 
   xlab="Age (years)", ylab=expression(paste("Survivorship ", italic(l(x)))))
 
@@ -86,8 +88,11 @@ for(x in 1:200)
   fert[x]<-phi[1,1]
 }
 
+op<-par(mar=c(5,5,1,1))
 plot(fert, type="l", ylim=c(0,0.07), las=1,
-  xlab="Age (years)", ylab="Age-specific fertility")
+  xlab="Age (years)", ylab="")
+mtext("Age-specific fertility", 2,3.5)
+par(op)
 
 }
 \keyword{datasets}

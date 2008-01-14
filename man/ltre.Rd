@@ -1,11 +1,11 @@
-\name{ltre}
-\alias{ltre}
+\name{LTRE}
+\alias{LTRE}
 \title{ Life Table Response Experiment }
 \description{
   Function to evaluate sensitivities in a fixed Life Table Response Experiment (LTRE).
 }
 \usage{
-ltre(trts, ref)
+LTRE(trts, ref)
 }
 \arguments{
   \item{trts}{ A treatment matrix or a list of two or more treatment matrices }
@@ -30,7 +30,7 @@ Massachusetts, USA.
 \author{ Chris Stubben }
 \note{ The example of a fixed LTRE is from 
 
-Amy Lauren Angert. 2006. Demography of central and marginal
+A.L. Angert. 2006. Demography of central and marginal
 populations of monkeyflowers (Mimulus cardinalis and
 M. lewisii). Ecology 87:2014-2025.
 
@@ -68,8 +68,8 @@ Cm<-Dm*SAc
 Cm
 sum(Cm)
 
-##  OR using ltre function
-Cm <-ltre(Atrt, Aref)
+##  OR using LTRE function
+Cm <-LTRE(Atrt, Aref)
 Cm
 sum(Cm)
 
@@ -79,7 +79,7 @@ card<-subset(monkeyflower,  species=="cardinalis" & year=="pooled")
 ## split matrices in rows into  list of 4 matrices 
 Atrt<-lapply(split(as.matrix(card[,4:19]), 1:4),  matrix, nrow=4, byrow=TRUE)
 names(Atrt)<-card$site
-Cm<-ltre(Atrt, Aref)
+Cm<-LTRE(Atrt, Aref)
 x<-sapply(Cm, sum)
 x
 names(x)<-c("BU", "RP", "WA", "CA")
@@ -116,14 +116,16 @@ p1<-p1[,x]
 covmat<- cov(p1)
 
 ## plots matching figure 3 in Brault & Caswell 1993 or figure 10.10 in Caswell 2001 (p 272)
-persp(covmat, theta=45, phi=15, box=FALSE)
+persp(covmat, theta=45, phi=15, box=FALSE,
+ main="Covariances")
 
 
 w1<- matrix(apply(p1, 2, mean), nrow=4)
 wS<-eigen.analysis(w1, zero=FALSE)$sensitivities
 ## V matrix of contributions
 contmat <- covmat * c(wS) %*% t(c(wS))
-persp(contmat, theta=45, phi=15, box=FALSE)
+persp(contmat, theta=45, phi=15, box=FALSE,
+main=expression(paste("Contributions to V(", lambda, ")")) )
 
 ## contributions of V associated with aij  (matrix on page 271 in Caswell)
 A<-matrix(apply(contmat, 2, mean), nrow=4)

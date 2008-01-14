@@ -57,7 +57,7 @@ described in section 9.7
 
 \bold{Chapter 10}.  Life Table Response Experiments
 \describe{
-\item{ \code{\link{ltre}} }{ section 10.1 and 10.2.  Fixed designs in
+\item{ \code{\link{LTRE}} }{ section 10.1 and 10.2.  Fixed designs in
     LTREs.  The example includes code for variance
     decomposition in random design. }
 
@@ -71,7 +71,7 @@ described in section 9.7
     stochastic growth from a sequence of matrices in a uniform and
     nonuniform environment }
 }
-See the \code{stoch.lams} function in the \code{demogR} package for senstivity and elasticity of log
+See the \code{stoch.sens} function in the \code{demogR} package for senstivity and elasticity of log
 stochastic growth rate described in section 14.4.   
 
 \bold{Chapter 15}.  Demographic stochasticity

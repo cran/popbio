@@ -1,4 +1,13 @@
 New features by version.
+
+#############
+
+changes in version 1.1.6
+
+* changed ltre to LTRE
+
+* added plots to vitalsens example
+
 #############
 
 changes in version 1.1.5
