@@ -77,7 +77,7 @@ a<-eigen.analysis(whaleA)
 a
 ymax<-max(a$repro.value)*1.25
 barplot(a$repro.value, col="blue", ylim=c(0,  ymax ), xpd=FALSE, 
-       ylab="Reproductive value", xlab="Killer whale stage class")
+       ylab="Reproductive value", xlab="Stage class", main="Killer Whale")
 box()
 
 ## display sensitivities of "impossible" transitions 
@@ -90,7 +90,7 @@ teaselA<-teasel$T + teasel$F
 a<-eigen.analysis(teaselA)
 a
 barplot(a$stable.stage, col="green", ylim=c(0,1), 
-       ylab="Stable stage proportion", xlab="Teasel stage class")
+       ylab="Stable stage proportion", xlab="Stage class", main="Teasel")
 box()
 }
 \keyword{ survey }

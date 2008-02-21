@@ -34,20 +34,23 @@ calathea[["plot1 1983"]]
 calathea[1:4]
 
 ## all 1982 matrices 
-calathea[seq(1,16,4)]
-## all 1983
-## calathea[seq(1,16,4)+1]
+calathea[ grep("1982", names(calathea)) ]
+# OR
+# calathea[seq(1,16,4)]
+# split(calathea, 1:4)[[1]]
 
-## MEAN matrix
-matrix(apply(matrix(unlist(calathea), nrow=16, byrow=TRUE), 2, mean), nrow=8)
+## MEAN matrix (pooled matrix in table 8 - see LTRE example)
+mean(calathea)
 
 ## Growth rates -see Figure 7
 x<- matrix(sapply(lapply(calathea, eigen.analysis), '[[', "lambda1"), nrow=4)
-matplot(x, type='l', las=1, xlim=c(0.7,4.3), ylim=c(.7,1.3), yaxs='i', xaxt='n', ylab="Growth rate")
+matplot(x, type='l', las=1, xlim=c(0.7,4.3), ylim=c(.7,1.3), yaxs='i', 
+xaxt='n', ylab="Growth rate")
 axis(1, 1:4, paste(82:85, "-", 83:86, sep=""))
 
 ## Damping ratios -see Table 12
-x<- matrix(sapply(lapply(calathea, eigen.analysis), '[[', "damping.ratio"), nrow=4)
+#x<-matrix(sapply(lapply(calathea, eigen.analysis), '[[',"damping.ratio"), nrow=4)
+x<-matrix(sapply(calathea, eigen.analysis)["damping.ratio",], nrow=4)
 dimnames(x)<-list(paste(1982:1985, "-", 1983:1986, sep=""), paste("plot", 1:4))
 x
 }

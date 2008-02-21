@@ -13,14 +13,24 @@ A list of 4 matrices from 1985-1988
     A projection matrix with 6 size classes: seeds, seedlings, and 4 size classes divided by plant area.
 }
 \source{
-   Table 6.7 in Morris and Doak (2002), Quantitative Conservation Biology.  The original data is from Frost (1990).
+   Table 6.7 in Morris and Doak (2002).  The original data is from Frost (1990).
+
+Morris, W. F., and D. F. Doak. 2002. Quantitative conservation
+biology: Theory and practice of population viability
+analysis. Sinauer, Sunderland, Massachusetts, USA.
 
 }
 
 \examples{
 data(hudsonia)
+## various ways to return lambda1 for each year
+sapply(hudsonia, function(x) eigen.analysis(x)$lambda1)
+#sapply(hudsonia, eigen.analysis)["lambda1",]
+#sapply(lapply(hudsonia, eigen.analysis), "[[", "lambda1")
 
-lapply(hudsonia, function(x){Re(eigen(x)$values[1])})
+## mean matrix 
+mean(hudsonia)
+eigen.analysis(mean(hudsonia))$lambda1
 
 }
 \keyword{datasets}

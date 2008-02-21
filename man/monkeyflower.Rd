@@ -56,7 +56,7 @@ stages<-c("seed", "sm.nr", "lg.nr", "repro")
 A
 class(A)
 
-## Convert dataframe to matrix or vector first -either one works 
+## Convert dataframe to matrix or vector first
 ## matrix(as.matrix(A), nrow=4, byrow=TRUE, dimnames=list(stages, stages) )
 A <-matrix(unlist(A), nrow=4, byrow=TRUE, dimnames=list(stages, stages) )
 A

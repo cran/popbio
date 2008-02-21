@@ -2,6 +2,16 @@ New features by version.
 
 #############
 
+changes in version 1.1.7
+
+* added Calathea to LTRE example with plot, year, and interaction
+  effects
+
+* added s3 method for function mean.list to get the mean matrix from a list of
+  matrices.  
+
+#############
+
 changes in version 1.1.6
 
 * changed ltre to LTRE
@@ -15,7 +25,7 @@ changes in version 1.1.5
 * added ltre function for fixed LTRE.  A random design is included in the
   example
 
-* added calathea dataset for tropical understory herb in Horvitz and
+* added Calathea dataset for tropical understory herb in Horvitz and
   Schemske (1995)
 
 * fix damping ratio in eigen.analysis.  Now the function finds the

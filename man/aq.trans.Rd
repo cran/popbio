@@ -34,32 +34,26 @@
     using a combination of status and size data recorded in the
     field.  See \code{demo(stage.classify)} for more details.
 }
-\source{Data  set owners: Brook Milligan, Chris Stubben, Allan Strand}
+\source{Data set owners: Brook Milligan, Chris Stubben, Allan Strand}
 %\references{}
 \seealso{ \code{\link{aq.census}} }
 \examples{
 data(aq.trans)
-
 head(aq.trans,3)
 
 sv<-table(aq.trans$stage, aq.trans$year)
 addmargins(sv)
+stage.vector.plot(sv[-1,], prop=FALSE, main="Aquilegia stage vectors")
 
-stage.vector.plot(sv[-1,], prop=FALSE)
-
-### plot proportions
-
-#stage.vector.plot(sv[-1,], ylim=c(0,1), col=rainbow(4))
-
-op<-par(mar=c(5,4,2,7))
+## plot proportions with barplot
+## use xpd to draw legend outside plot boundaries
+op<-par(mar=c(5,4,2,7), xpd=TRUE)
 x<-barplot(prop.table(sv[-1,],2), las=1,
 xlab="Year", ylab="Proportion in stage class", 
 col=rainbow(4), ylim=c(0,1), xaxt='n', space=.5)
 box()
 yrs<-substr(colnames(sv),3,4)
 axis(1,x, yrs)
-## draw outside plot boundaries
-par(xpd=TRUE) 
 legend(13,0.7, rev(rownames(sv)[-1]), fill=rev(rainbow(4)))
 par(op)
 

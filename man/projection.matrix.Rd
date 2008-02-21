@@ -22,8 +22,9 @@ projection.matrix(transitions, stage=NULL, fate=NULL,
   \item{fate }{ name of the fate column in the stage-fate data frame.
       Defaults to "fate" }
   \item{fertility }{ one or more names of fertility columns in
-      the stage-fate data frame.  By default, any column names matching names in the
-      sort vector are assumed to contain individual fertilities}
+      the stage-fate data frame.  By default, any column names
+      matching stage class names (i.e., names in the
+      sort vector below) are assumed to contain individual fertilities}
   \item{sort }{ a vector listing stage classes that correspond to the
       rows and columns of the desired projection matrix.  Default is
       to use \code{\link{levels}} in the stage column.  }
