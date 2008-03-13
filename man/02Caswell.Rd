@@ -21,6 +21,9 @@
 
 \bold{Chapter 5}.  Events in the Life Cycle
 \describe{
+\item{ \code{\link{whale}} }{   Figures 5.1 and 5.2. The example
+    includes code to calculate age-specific
+    survivorship and fertility curves.  }
 \item{ \code{\link{fundamental.matrix}} }{   section 5.3.1.
     Calculate age-specific survival from a stage classified matrix
     using the fundamental matrix N }
@@ -31,7 +34,6 @@
     generation time of a stage-classified matrix  }
 
 }
-The \link{whale} dataset includes code to calculate age-specific survival and fertility curves (figure 5.1 and 5.2).
 
 \bold{Chapter 6}. Parameter estimation
 \describe{

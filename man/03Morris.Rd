@@ -5,8 +5,13 @@
 \description{ 
 \bold{Chapter 3}
 \describe{
-\item{ \code{\link{countCDFxt}} }{ Box 3.4. Calculate count-based
-    extinction probabilities and bootstrap confidence intervals }
+\item{ \code{\link{grizzly}} }{ Table 3.1. Grizzly bear population
+    counts.  The example includes code to calculate mean, variance and
+confidence intervals using regression and other procedures }
+\item{ \code{\link{extCDF}} }{ Box 3.3. Count-based
+    extinction time cumulative distribution function  }
+\item{ \code{\link{countCDFxt}} }{ Box 3.4. Count-based
+    extinction probabilities with bootstrap confidence intervals }
 }
 
 \bold{Chapter 7}

@@ -1,8 +1,19 @@
-New features by version.
+#############
+
+changes in version 1.1.8 (2008-03-13)
+
+* added grizzly bear population counts for count-based PVAs
+
+* added extCDF function for extinction time cdfs.  This function is
+  called by countCDFxt and was previously hidden in that function.
+
+* added plot optioin to countCDFxt and set default value for tq
+  option, which is usually equal to number of tranistions (nt) for
+  regularly censused populations.
 
 #############
 
-changes in version 1.1.7
+changes in version 1.1.7 (2008-02-21)
 
 * added Calathea to LTRE example with plot, year, and interaction
   effects
@@ -12,7 +23,7 @@ changes in version 1.1.7
 
 #############
 
-changes in version 1.1.6
+changes in version 1.1.6 (2008-01-14)
 
 * changed ltre to LTRE
 
@@ -20,7 +31,7 @@ changes in version 1.1.6
 
 #############
 
-changes in version 1.1.5
+changes in version 1.1.5 (2008-01-05)
 
 * added ltre function for fixed LTRE.  A random design is included in the
   example
@@ -28,21 +39,22 @@ changes in version 1.1.5
 * added Calathea dataset for tropical understory herb in Horvitz and
   Schemske (1995)
 
-* fix damping ratio in eigen.analysis.  Now the function finds the
-  second largest modulus  and not just modulus of the second eigenvalue ( in case
+* fixed damping ratio in eigen.analysis.  Now the function finds the
+  second largest modulus and not just modulus of the second eigenvalue ( in case
   of eigenvalues with equal magnitudes in imprimitive matrices).
   Also, added which.max to find dominant eigenvalue instead of
-   which(Re(ev$values)==max(Re(ev$values))).   
+   which(Re(ev$values)==max(Re(ev$values))) which may return two or
+  more indexes in some cases
 
 #############
 
-changes in version 1.1.4
+changes in version 1.1.4 (2007-11-13)
 
-* fixed error in image plot on teasel example
+* fixed error in image plot on teasel example after loading to CRAN
 
 #############
 
-changes in version 1.1.3
+changes in version 1.1.3 (2007-11-13)
 
 * added function vitalsens for vital rate sensitivities and
   elasticities 
@@ -51,13 +63,12 @@ changes in version 1.1.3
 
 * changed name of lambda to lambda1 in eigen.analysis output to match
   package demogR (in case demogR is loaded after popbio, then
-  functions using eigen.analysis should still work - unless matrix is
-  singular)
-
+  functions using eigen.analysis should still work with some
+  exceptions, eg, if matrix is singular)
 
 #############
 
-changes in version 1.1.2
+changes in version 1.1.2 (2007-09-13)
 
 * fixed undefined nyrs variable in varEst
 
@@ -69,7 +80,7 @@ changes in version 1.1.2
 
 #############
 
-changes in version 1.1.1 
+changes in version 1.1.1 (2007-08-25) 
 
 * added pfister.plot to create log-log plots of variance
   vs. sensitivity and CV vs. elasticity
@@ -89,29 +100,29 @@ changes in version 1.1.1
 * changed colors in stage.vector.plot to rainbow(8)
 
 * added column names to boot.transitions (vector and matrix output,
-  e.g., a11, a21, a31 a12, ...) and pop.projection  output 
+  e.g., a11, a21, a31 a12, ...) and pop.projection output 
  
 * changed stage.vector.plot examples to project matrix in example 2.1
   in Caswell and create figure 2.3.
 
 ###################
-Changes in version 1.1
 
-* added many new functions and datasets contirubted by Patrick Nantel
+changes in version 1.1  (2007-07-28)
+
+* added new functions and datasets contirubted by Patrick Nantel
 
 * added default row and column names (if missing) to stage.vector.plot,
-  checks for matrix with 2 or more stages, and repeat
+  checks for matrix with 2 or more stages, and repeats
   colors if necessary
 
 * now checking if matrix is singular in eigen.analysis.  If matrix is
   singular, NA values are used instead of exiting with a warning.
   This is useful for bootstrapping that may create singular matrices
-  (and you don't want to exit with error if calculating
-  elasticities/sensitivies or other bootstrap parameter).  
 
-* added print statements on long loops used in all three  stochastic growth  functions to track progress
+* added print statements on long loops used in all three  stochastic
+  growth  functions to track progress
  
-* now rounding stages in vector before checking extinction probability
+* now rounding stages first in vector before checking extinction probability
   in stoch.quasi.ext.  Now if vector is (.3,.4,.4) and ext prob=1 then
   rounding stages sets n=0.
 

@@ -14,7 +14,6 @@ colorguide(col, main = "", border = FALSE)
 }
 %\details{ }
 \value{ A plot of colors and names } 
-}
 %\references{  }
 \author{ Chris Stubben }
 %\note{  }

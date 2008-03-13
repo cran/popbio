@@ -243,7 +243,7 @@ fundamental.matrix(x$T)$N
 caption("Age-specific traits from mean matrix")
 
 ## Check generation time for all matrices.  If F matrix is empty, generation time is Inf
-lapply(fill.A, function(A){x<-aq.tf(A); generation.time(x$T, x$F)})
+sapply(fill.A, function(A){x<-aq.tf(A); generation.time(x$T, x$F)})
 
 caption("Generation time for each projection matrix")
 

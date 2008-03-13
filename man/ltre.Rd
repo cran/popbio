@@ -97,9 +97,9 @@ box()
 title(expression(italic("Calathea ovandensis")))
 
 
-#######  Mimulus cardinalis 
-## Pooled Reference matrix kindly provided by Amy Angert 1/2/2008.
-mimulus_pool<-matrix( c(
+#######  Mimulus 
+## Pooled M. cardinalis reference matrix kindly provided by Amy Angert 1/2/2008.
+m_card_pool<-matrix( c(
 1.99e-01, 8.02e+02, 5.82e+03, 3.05e+04,
 2.66e-05, 7.76e-02, 2.31e-02, 1.13e-03,
 7.94e-06, 8.07e-02, 3.22e-01, 2.16e-01,
@@ -111,7 +111,7 @@ card<-subset(monkeyflower,  species=="cardinalis" & year=="pooled")
 ## split rows into list of 4 matrices 
 Atrt<-lapply(split(as.matrix(card[,4:19]), 1:4),  matrix, nrow=4, byrow=TRUE)
 names(Atrt)<-card$site
-Cm<-LTRE(Atrt, mimulus_pool)
+Cm<-LTRE(Atrt, m_card_pool)
 x<-sapply(Cm, sum)
 x
 names(x)<-c("BU", "RP", "WA", "CA")
