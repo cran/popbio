@@ -65,6 +65,15 @@ described in section 9.7
 
 }
 
+
+\bold{Chapter 12}.  Statistical inference
+\describe{
+\item{ \code{\link{boot.transitions}} }{ section 12.1.5.5.  
+    Methods to bootstrap observed census transitions and calculate 
+    confidence intervals using \code{\link{quantile}} }
+}
+
+
 \bold{Chapter 14}.  Environmental stochasticity
 \describe{
 \item{ \code{\link{stoch.growth.rate}} }{ section 14.3.  Calculate the

@@ -18,22 +18,23 @@ projection.matrix(transitions, stage=NULL, fate=NULL,
       current census,  fate in the subsequent census, and one or
       more fertility columns }
   \item{stage }{ a column name or position of the stage column in the
-      stage-fate data frame.  Defaults to "stage"}
+      stage-fate data frame.  Defaults to "stage".   }
   \item{fate }{ name of the fate column in the stage-fate data frame.
       Defaults to "fate" }
   \item{fertility }{ one or more names of fertility columns in
       the stage-fate data frame.  By default, any column names
-      matching stage class names (i.e., names in the
-      sort vector below) are assumed to contain individual fertilities}
+      matching stage class names are assumed to contain individual fertilities}
   \item{sort }{ a vector listing stage classes that correspond to the
-      rows and columns of the desired projection matrix.  Default is
-      to use \code{\link{levels}} in the stage column.  }
+   rows and columns of the desired projection matrix.  Currently, names
+   in this vector must match a level in the stage column.  Also, this option
+   should only be used if stages are not \code{\link{ordered}}, since the default is to sort by
+   \code{\link{levels}} in the stage column.  }
 
-  \item{add}{ a vector listing row,column and value, used to add
+  \item{add}{ a vector listing row, column and value, used to add
       \emph{estimated} transtions to the transition matrix (e.g.,  a
       transition from seed bank to seedling).  May be repeated.}
   \item{TF}{ output separate transition (T) and fertility (F)
-      matrices.  Default is to output single projection matrix A }
+      matrices.  Default is FALSE and outputs a single projection matrix A }
 }
 \details{ The state transition rates are estimated using transition
 frequency tables (see section 6.1.1, Caswell 2001), so this
@@ -69,36 +70,34 @@ true, then a list with 2 items where A=T+F
 
 data(test.census)
 
-trans <- subset(merge(test.census, test.census, by = "plant",   sort =FALSE), 
+trans01 <- subset(merge(test.census, test.census, by = "plant",   sort =FALSE), 
                     year.x==2001 & year.y==2002 )
 ## Add individual fertilities using "anonymous reproduction"  based on the 
 ## proportional reproductive outputs of flowering plants and the total number 
 ## of seedlings at the end of the projection interval
-trans$seedferts <- trans$fruits.x/sum(trans$fruits.x) * 5
+trans01$seedferts <- trans01$fruits.x/sum(trans01$fruits.x) * 5
+trans01
 
 stages<-c("seedling", "vegetative", "reproductive")
 
 ## three ways to specify columns
-projection.matrix(trans, stage=stage.x, fate=stage.y, fertility=seedferts, sort=stages)
-projection.matrix(trans, 3, 6, 8, c(3,4,2))
-projection.matrix(trans, "stage.x", "stage.y", "seedferts", stages)
+projection.matrix(trans01, stage.x, stage.y, seedferts, stages)
+projection.matrix(trans01, 3, 6, 8, c(3,4,2))
+projection.matrix(trans01, "stage.x", "stage.y", "seedferts", stages)
 
-## or use column defaults (fertility column (seedling) now matches stage class name)
-names(trans)[c(3, 6, 8)] <- c("stage", "fate", "seedling")
-# and order stages in dataframe
-trans$stage<-ordered(trans$stage, stages)
+## BEST to use column default (fertility column (seedling) now matches stage class name)
+names(trans01)[c(3, 6, 8)] <- c("stage", "fate", "seedling")
+# AND order stages in dataframe
+trans01$stage<-ordered(trans01$stage, stages)
 
-projection.matrix(trans)
-projection.matrix(trans, TF=TRUE)
-
-## OR transition matrix
-prop.table(table( trans$fate, trans$stage),2)[stages,]
-##  first-row of fertility matrix
-tapply(trans$seedling, trans$stage, mean)
+projection.matrix(trans01)
+projection.matrix(trans01, TF=TRUE)
 
 ## Example using Aquilegia data
 data(aq.trans)
 sf<- subset(aq.trans, year==1998 & plot==909, c(year, plant, stage, fruits, fate))
+## rows and columns of final matrix
+levels(sf$stage)
 
 ## seedlings next year
 seedlings<-nrow(subset(aq.trans, plot==909 & year==1999 & stage=="recruit")) 
@@ -117,13 +116,9 @@ recruitment.rate<-seedlings/(seed.bank.size + seeds.from.plants)
 sf$recruit<- sf$fruits/sum(sf$fruits) * seeds.from.plants * recruitment.rate
 sf$seed<-sf$fruits * seeds.per.fruit * seed.survival
 
-
 ## add seed bank survival and seed bank recruitment rate to transition matrix
-
 A<-projection.matrix(sf, add=c(1,1, seed.survival, 2,1, recruitment.rate ))
 A
 max(Re(eigen(A)$values))
-
-
 }
 \keyword{ survey }

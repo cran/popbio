@@ -1,16 +1,19 @@
 projection.matrix <-function(transitions, stage=NULL, fate=NULL, fertility=NULL, sort=NULL,  add=NULL, TF=FALSE )
 {
-   if(missing(stage)){ stage <-"stage" }
-   if(missing(fate)){  fate  <-"fate" }   
+   if(missing(stage)){ stage <-"stage"}
+   if(missing(fate)){  fate  <-"fate" }
+   
    ## copied from subset.data.frame -- can specify stage, fate, fertility columns
    ## by number or name (with or without quotes)
    nl <- as.list(1:ncol(transitions))
    names(nl) <- names(transitions)
    stage <- eval(substitute(stage), nl, parent.frame())
    fate <- eval(substitute(fate), nl, parent.frame())
+   if(is.null(transitions[,stage])){stop("No stage column matching ", stage)}
+   if(is.null(transitions[,fate])){stop("No fate column matching ", fate)}
    ## default - sort matrix by levels in stage column 
    if(missing(sort)) { sort<-levels( transitions[,stage]  )  }
-   ## default -- fertility columns equal stage class name
+   ## default -- fertility columns equal one or more stage class names
    if(missing(fertility)){ fertility<- intersect(sort, names(transitions)) }
    fertility <- eval(substitute(fertility), nl, parent.frame())
    ## Create transition frequency table.
@@ -23,7 +26,7 @@ projection.matrix <-function(transitions, stage=NULL, fate=NULL, fertility=NULL,
    {
       warning( paste("Error sorting matrix.
   Make sure that levels in stage and fate columns
-  match stages listed in sort.\n Printing unsorted matrix instead!\n"), call. = FALSE)
+  match stages listed in sort option above.\n Printing unsorted matrix instead!\n"), call. = FALSE)
       # set sort to TRUE for fertility matrix in next section
       sort<-TRUE
       T_matrix <- prop.table(tf,2)

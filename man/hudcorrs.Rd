@@ -11,7 +11,7 @@
 \usage{data(hudcorrs)}
 \format{
   A list with 2 correlation matrices, corrin (within year correlation)
-  and corrout (between year correlation) and a vector with vital rate labels.
+  and corrout (between year correlation).
 }
 %\details{}
 \source{ The correlation matrices in
@@ -31,8 +31,6 @@ Sinauer, Sunderland, Massachusetts, USA.
 
 \examples{
 data(hudcorrs)
-## add row column names stored in vr
-dimnames(hudcorrs$corrin)<-list(hudcorrs$vr, hudcorrs$vr)
 hudcorrs$corrin
 heatmap(hudcorrs$corrin[13:1,], Rowv = NA,  Colv = NA, scale = "none")
 }

@@ -18,10 +18,10 @@
 
 \examples{
 data(test.census)
-test.stage <- c("seedling", "vegetative", "reproductive")
+stages <- c("seedling", "vegetative", "reproductive")
 
 ## Cross-tabulate stage vectors and order rows by stage
-sv<- table(test.census$stage, test.census$year)[test.stage,]
+sv<- table(test.census$stage, test.census$year)[stages,]
 sv
 stage.vector.plot(sv)
 
@@ -43,27 +43,29 @@ trans<-trans[,c(1:4,6)]
 colnames(trans)[2:5] <- c("year", "stage", "fruits", "fate")
 rownames(trans) <- 1:nrow(trans)
 ## Order stage and fate columns
-trans$stage <- ordered(trans$stage, levels = test.stage)
-trans$fate  <- ordered(trans$fate,  levels = c(test.stage,"dead"))
+trans$stage <- ordered(trans$stage, levels = stages)
+trans$fate  <- ordered(trans$fate,  levels = c(stages,"dead"))
 
 ## Select transitions for 2001-2002 and count offspring (seedlings)
-test.trans <- subset(trans, year==2001)
+trans01 <- subset(trans, year==2001)
 seedlings<-nrow(subset(test.census, year==2002 & stage=="seedling"))
 
 ## Add individual fertilities using "anonymous reproduction"  based on the 
 ## proportional reproductive outputs of flowering plants and the total number 
 ## of seedlings at the end of the projection interval
-test.trans$seedling<-test.trans$fruits/sum(test.trans$fruits) * seedlings
-test.trans
+trans01$seedling<-trans01$fruits/sum(trans01$fruits) * seedlings
+trans01
 
 ##  Create transition frequency table  and build T matrix
-tf<-table( test.trans$fate, test.trans$stage, dnn=c("fate","stage") )
+tf<-table( trans01$fate, trans01$stage )
 tf
-T.mat<-prop.table(tf,2)[-4,]
+## remove "dead" fate from matrix
+## T.mat<-prop.table(tf,2)[-4,]
+T.mat<-prop.table(tf,2)[stages,]
 T.mat
 
 ## Summarize stage-specific fertility rates and build F matrix
-fert<-tapply(test.trans$seedling, test.trans$stage, mean)
+fert<-tapply(trans01$seedling, trans01$stage, mean)
 fert
 F.mat<-T.mat*0
 F.mat[1,]<- fert
@@ -73,6 +75,6 @@ F.mat
 T.mat+F.mat
 
 ## OR use projection matrix function - 
-projection.matrix(test.trans)
+projection.matrix(trans01)
 }
 \keyword{datasets}

@@ -1,4 +1,4 @@
-multiresultm <- function(n,T,F,varF)
+multiresultm <- function(n,T,F,varF=NULL)
 {
   # First, determine numbers from survival and growth
           clas  <- length(n)                            # number of classes

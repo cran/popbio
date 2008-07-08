@@ -59,11 +59,11 @@ vr<-seq(0,1,.1)
 vrsen<-matrix(numeric(n*length(vr)), ncol=n, dimnames=list(vr, names(goose.vr)))
 for (h in 1:n)
 {
-   goose.vr<-list(  Ss0=0.1357,  Ss1=0.8926,  Sf2=0.6388,  Sf3= 0.8943)
+   goose.vr2<-list(  Ss0=0.1357,  Ss1=0.8926,  Sf2=0.6388,  Sf3= 0.8943)
    for (i in 1:length(vr))
    {
-      goose.vr[[h]]<-vr[i]
-      A<-matrix(sapply(goose.el, eval,goose.vr , NULL), nrow=sqrt(length(goose.el)), byrow=TRUE)
+      goose.vr2[[h]]<-vr[i]
+      A<-matrix(sapply(goose.el, eval,goose.vr2 , NULL), nrow=sqrt(length(goose.el)), byrow=TRUE)
       vrsen[i,h] <- max(Re(eigen(A)$values)) 
    }
 }

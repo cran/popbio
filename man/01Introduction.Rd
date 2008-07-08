@@ -29,8 +29,11 @@ in the Journal of Statistical Software is available at
 \url{http://www.jstatsoft.org/v22/i11}.  
 }
 
-\references{ 
-Caswell, H. 2001. Matrix population models: Construction,
+\references{
+To cite the popbio package in publications, type
+\code{citation('popbio')}.  For details on matrix population models, see
+
+ Caswell, H. 2001. Matrix population models: Construction,
 analysis, and interpretation, Second edition. Sinauer, Sunderland,
 Massachusetts, USA. 
 

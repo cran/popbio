@@ -8,13 +8,15 @@
   stage class at \emph{t+1}.
 }
 \usage{
-multiresultm(n, T, F, varF)
+multiresultm(n, T, F, varF=NULL)
 }
 \arguments{
   \item{n}{the vector of numbers of individuals per class at t }
   \item{T}{ a transition T matrix}
   \item{F}{ a fertility F matrix }
-  \item{varF}{ a matrix of inter-individual variance in fertilities.  Use varF = NULL for simulating population where clutch size = 1, so that fertilities give the probabilities of birth.}
+  \item{varF}{ a matrix of inter-individual variance in fertilities,
+      default is NULL for simulating population where clutch size = 1, 
+      so that fertilities give the probabilities of birth.}
 }
 %\details{}
 \value{
@@ -39,8 +41,8 @@ Sinauer, Sunderland, Massachusetts, USA.
 %\seealso{ \code{\link{vitalsim}}}
 \examples{
 data(whale)
-multiresultm(c(1,9,9,9),whale$T, whale$F,varF=NULL)
-multiresultm(c(1,9,9,9),whale$T, whale$F,varF=NULL)
+multiresultm(c(1,9,9,9),whale$T, whale$F)
+multiresultm(c(1,9,9,9),whale$T, whale$F)
 
 ## create graph similar to Fig 15.3 a
 reps <- 10    # number of trajectories
@@ -52,7 +54,7 @@ for (j in 1:reps)
    n <- nzero
    for (i in 1:tmax) 
    {
-      n <- multiresultm(n,whale$T,whale$F,varF=NULL)
+      n <- multiresultm(n,whale$T,whale$F)
       totalpop[i,j] <- sum(n)
    } 
 } 

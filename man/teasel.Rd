@@ -40,7 +40,7 @@ matplot(t(tea$sensitivities), las=1,
 legend(4,45, colnames(elas), pch=as.character(1:6), col=1:6,
 title="Fate at time t+1")
 ## log-scale
-matplot(t(tea$sensitivities), log='y', yaxt='n',
+matplot(t(tea$sensitivities), log='y', yaxt='n', type='b',
 xlab="Stage at time t",  ylab="Sensitivity (log scale)",
 main="Sensitivity matrix using matplot #2")
 axis(2, at=c(0.0001, 0.01, 1), labels=expression(10^-4, 10^-2, 10^0) ,

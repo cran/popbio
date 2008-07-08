@@ -54,7 +54,6 @@ for (i in 1:length(n) )
 }
 plot(n, exts, type='l', las=1,
 xlab="Current population size",
-ylab="Probability of quasi-extinction by year 50",
-main="Quasi-extinction depends on population size")
+ylab="Probability of quasi-extinction by year 50")
 }
 \keyword{ survey }

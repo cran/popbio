@@ -28,7 +28,7 @@ vitalsens <- function(elements, vitalrates)
    devs <- lapply(deriv.funcs, function (x) do.call(x, vitalrates))
    for (i in 1:length(vitalrates))
    {
-      derivs <- matrix( as.numeric(lapply(devs, function (x) x@gradient[i])), nrow=n, byrow=TRUE)
+      derivs <- matrix( as.numeric(lapply(devs, function (x) attr(x, "gradient")[i])), nrow=n, byrow=TRUE)
      res[i,2] <-  sum(derivs*eig$sensitivities)
      res[i,3] <- vitalrates[[i]]/eig$lambda1*sum(derivs*eig$sensitivities)   
    }
