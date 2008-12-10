@@ -4,11 +4,9 @@
 \title{Introduction to the popbio Package} 
 \description{ 
 \code{Popbio} is a package for the construction and analysis of matrix
-population models.   An overview of functions is contained in the numbered sections
-at the top of the \link[popbio:00Index]{popbio contents page}.
-First, the popbio package consists  of the \R translation of
+population models.   First, the package consists  of the \R translation of
 \code{Matlab} code found in Caswell (2001) or Morris and Doak
-(2002).  A list of converted functions within each book can be accessed 
+(2002) and a list of converted functions within each book can be accessed 
 using \code{help(Caswell)} and \code{help(Morris)} within R,  or by following
 the links to  \link{02.Caswell} and \link{03.Morris} from the help content pages.
 
@@ -20,11 +18,11 @@ individuals using transition frequency tables.  To estimate vital
 rates in animal demography using capture-recapture methods, try the
 \code{Rcapture} package instead.
 
-The package also includes plotting methods and sample datasets
+Finally, the package includes plotting methods and sample datasets
 consisting of either published projection matrices or annual census
 data from demography studies.  Two sample demonstrations
 illustrate some of the package capabilities, \code{demo(fillmore)} and
-\code{demo(stage.classify)}.  Finally, a description of the package
+\code{demo(stage.classify)}.  A description of the package
 in the Journal of Statistical Software is available at
 \url{http://www.jstatsoft.org/v22/i11}.  
 }

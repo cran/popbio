@@ -11,8 +11,8 @@ stoch.growth.rate(matrices, prob = NULL, maxt = 50000, verbose=TRUE)
 \arguments{
   \item{matrices}{ a \code{\link{list}} with two or more projection matrices, or a matrix with one projection matrix per column, with elements filled by columns }
   \item{prob}{ a vector of probability weights used by \code{\link{sample}} for selecting the projection matrices, defaults to equal probabilities }
-  \item{maxt}{ number of time intervals, default 50,000  }
-  \item{verbose}{ Print comment at start of time 1,10,000, 20,000,etc.}
+  \item{maxt}{ number of time intervals, default 50000  }
+  \item{verbose}{ Print comment at start of time 1, 10000, 20000, etc.}
 }
 %\details{}
 \value{

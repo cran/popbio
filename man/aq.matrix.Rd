@@ -56,6 +56,5 @@ aq.matrix(x, recruits=rec)
 aq.matrix(x, recruits=rec, seed.survival=.7, seed.bank=3000)
 
 
-
 }
 \keyword{ survey }

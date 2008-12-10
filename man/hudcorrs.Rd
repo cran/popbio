@@ -32,7 +32,6 @@ Sinauer, Sunderland, Massachusetts, USA.
 \examples{
 data(hudcorrs)
 hudcorrs$corrin
-heatmap(hudcorrs$corrin[13:1,], Rowv = NA,  Colv = NA, scale = "none")
 }
 
 \keyword{datasets}

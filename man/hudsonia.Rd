@@ -29,8 +29,9 @@ sapply(hudsonia, function(x) eigen.analysis(x)$lambda1)
 #sapply(lapply(hudsonia, eigen.analysis), "[[", "lambda1")
 
 ## mean matrix 
-mean(hudsonia)
-eigen.analysis(mean(hudsonia))$lambda1
+x<-mean(hudsonia)
+image2(x, mar=c(1,4,4,1))
+eigen.analysis(x)$lambda1
 
 }
 \keyword{datasets}

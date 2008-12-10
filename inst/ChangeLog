@@ -1,3 +1,14 @@
+changes in version 1.1.10 (2008-12-10)
+
+	* added image2 plot for projection, sensitivity and elasticity
+	matrices.  Examples were added to a number of help files.
+
+	* fixed stage.vector.plot to allow NA values as part of input
+
+	* forgot to escape matrix multiplier %*% in LTRE example, so last
+	plot and matrix were wrong, since % is intrepreted as comment
+	character in help files (*.Rd).
+	
 changes in version 1.1.9 (2008-07-08)
 
 	* fixed error in vitalsens example noted by Jay Rotella.
@@ -6,12 +17,12 @@ changes in version 1.1.9 (2008-07-08)
 
 	* changed  x@gradient[i] to attr(x, "gradient")[i] in vitalsens to
 	avoid error in R-devel 2.8: trying to get slot "gradient" from an
-	objet of a basic class ("numeric") with no slots
+	object of a basic class ("numeric") with no slots
 	
 	* added ChangeLog and Citation.  Now citation("popbio") will
 	return JSS article.
 
-	* saved hudcorrs as *.rda file type with two just elements, corrin
+	* saved hudcorrs as *.rda file type with two elements, corrin
 	and corrout (ie, removed vector of vital rate labels).
 	
 	* set varF=NULL as default in multiresultm
@@ -54,7 +65,7 @@ changes in version 1.1.5 (2008-01-05)
 	and Schemske (1995)
 
 	* fixed damping ratio in eigen.analysis.  Now the function finds
-	the second largest modulus and not just modulus of the second
+	the second largest modulus and not just the modulus of the second
 	eigenvalue ( in case of eigenvalues with equal magnitudes in
 	imprimitive matrices).  Also, added which.max to find dominant
 	eigenvalue instead of which(Re(ev$values)==max(Re(ev$values)))

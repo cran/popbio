@@ -69,21 +69,6 @@ eigen.analysis(A)
 stage.vector.plot(pop.projection(A, c(1,1,1), 10)$stage.vectors)
 
 
-### Whale
-
-data(whale)
-whaleA<-whale$T+whale$F
-a<-eigen.analysis(whaleA)
-a
-ymax<-max(a$repro.value)*1.25
-barplot(a$repro.value, col="blue", ylim=c(0,  ymax ), xpd=FALSE, 
-       ylab="Reproductive value", xlab="Stage class", main="Killer Whale")
-box()
-
-## display sensitivities of "impossible" transitions 
-## (postreprod -> juvenile, yearling -> mature, etc)
-eigen.analysis(whaleA, zero=FALSE)$sensitivities
-
 ### Teasel
 data(teasel)
 teaselA<-teasel$T + teasel$F
@@ -92,5 +77,24 @@ a
 barplot(a$stable.stage, col="green", ylim=c(0,1), 
        ylab="Stable stage proportion", xlab="Stage class", main="Teasel")
 box()
+
+op<-par(mfrow=c(2,2))
+image2(teaselA, cex=.8, mar=c(0.5,3,4,1) )
+title("Projection matrix", line=3)
+
+image2(a$elasticities, cex=.8, mar=c(0.5,3,4,1) )
+title("Elasticity matrix", line=3)
+
+## default is sensitivity for non-zero elements in matrix
+image2(a$sensitivities, cex=.8, mar=c(0.5,3,4,1) )
+title("Sensitivity matrix 1", line=3)
+
+## use zero=FALSE to get sensitivities of all elements
+image2(eigen.analysis(teaselA, zero=FALSE)$sensitivities, cex=.8, mar=c(0.5,3,4,1) )
+title("Sensitivity matrix 2", line=3)
+par(op)
+
+
+
 }
 \keyword{ survey }

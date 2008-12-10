@@ -29,6 +29,8 @@ Massachusetts, USA.
 data(whale)
 A <- whale$T + whale$F
 A
+image2(A, mar=c(1,4.5,6,1))
+title("Killer whale matrix", line=3)
 eigen.analysis(A)$lambda1
 
 ## Individual pod

@@ -17,7 +17,7 @@ stage.vector.plot(stage.vectors, proportions=TRUE, legend.coords="topright",
   \item{ylim}{the y limits of the plot, defaults to min and max values in stage.vectors}
   \item{xlab}{a label for the x axis}
   \item{ylab}{a label for the y axis}
-  \item{col}{Vector of color names for line drawings.  Default is rainbow(8)}
+  \item{col}{vector of line colors, defaults to rainbow(8)}
  
   \item{...}{additional options are passed to \code{\link{plot}} function}
 

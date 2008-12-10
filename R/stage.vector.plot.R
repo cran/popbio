@@ -10,17 +10,17 @@ stage.vector.plot<-function(stage.vectors, proportions=TRUE, legend.coords="topr
     {
        if(is.null(ylab)){ylab<- "Proportion in stage class" }
        p<-prop.table(p, 2)         ## Change counts to proportions using prop.table
-       if(is.null(ylim)){ylim=c(min(p), max(p))}
+       if(is.null(ylim)){ylim=c(min(p, na.rm=TRUE), max(p, na.rm=TRUE))}
        plot(x, p[1,], type='n', ylim=ylim, xlab=xlab, ylab=ylab,...)                
     }
     else                            ## OR plot total number 
     {
        if(is.null(ylab)){ylab <- "Number in stage class" }
-       if(is.null(ylim)){ylim=c(floor(min(p)), ceiling(max(p))) }
+       if(is.null(ylim)){ylim=c(floor(min(p, na.rm=TRUE)), ceiling(max(p, na.rm=TRUE))) }
        plot(x, p[1,], type='n', ylim=ylim, xlab=xlab, ylab=ylab, ... )      
     }
     ## order legend by descreasing order of mean number in stage vector
-    y<-sort(apply(p,1,mean), index.return=TRUE, decreasing=TRUE)
+    y<-sort(apply(p,1,mean, na.rm=TRUE), index.return=TRUE, decreasing=TRUE)
     for (i in y$ix )                ## Loop through stage classes
     {                 
        lines(x, p[i,],lty=i, col=col[i], lwd=2)

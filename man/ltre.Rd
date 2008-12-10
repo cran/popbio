@@ -155,11 +155,12 @@ persp(covmat, theta=45, phi=15, box=FALSE,
 w1<- matrix(apply(p1, 2, mean), nrow=4)
 wS<-eigen.analysis(w1, zero=FALSE)$sensitivities
 ## V matrix of contributions
-contmat <- covmat * c(wS) %*% t(c(wS))
+contmat <- covmat * c(wS) \%*\% t(c(wS))
 persp(contmat, theta=45, phi=15, box=FALSE,
 main=expression(paste("Contributions to V(", lambda, ")")) )
 ## contributions of V associated with aij  (matrix on page 271 in Caswell)
 A<-matrix(apply(contmat, 2, mean), nrow=4)
+dimnames(A)<-dimnames(whale$T)
 round(A/sum(A),3)
 }
 \keyword{ survey }
