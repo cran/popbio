@@ -1,12 +1,15 @@
-net.reproductive.rate<-function(T,F)
+net.reproductive.rate<-function(A, ...)
 {
-   s <- length(diag(T))
-   N <- try(solve(diag(s) - T), silent=TRUE)
-   if(class(N)=="try-error"){r<-"T matrix is singular"}
+   if(!is.matrix(A)){stop("A projection matrix is required")}
+   A1<-splitA(A, ...)
+   Tmat<-A1[[1]]
+   Fmat<-A1[[2]]
+   s <- length(diag(Tmat))
+   N <- try(solve(diag(s) - Tmat), silent=TRUE)
+   if(class(N)=="try-error"){r<-NA}
    else{
-
-     R <- F %*% N
-     r<-max(Re(eigen(R)$values))
+     R <- Fmat %*% N
+     r<-lambda(R)
    }
    r
 }

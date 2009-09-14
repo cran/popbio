@@ -45,13 +45,13 @@ stage.vector.plot(sv[-1,], prop=FALSE, col=rainbow(4),
 op<-par(mar=c(5,4,2,7), xpd=TRUE)
 x<-barplot(prop.table(sv[-1,],2), las=1,
 xlab="Year", ylab="Proportion in stage class", main="Fillmore Canyon",
-col=rainbow(4), ylim=c(0,1), xaxt='n', space=.5)
+col=gray(1:4/4), ylim=c(0,1), xaxt='n', space=.5)
 box()
 yrs<-substr(colnames(sv),3,4)
 axis(1,x, yrs)
 ## draw outside plot boundaries
 
-legend(13,0.7, rev(rownames(sv)[-1]), fill=rev(rainbow(4)))
+legend(13,0.7, rev(rownames(sv)[-1]), fill=rev(gray(1:5/5)))
 par(op)
 
 
@@ -104,43 +104,24 @@ stage.vector.plot(  p$stage.vectors[-1,1:10], col=rainbow(4), prop=FALSE,
 # ---------------------------------------------------------------- #
 #  Eigenvalues and vectors
 
-eig.96<- eigen.analysis(aq.96$A)
+eig.96<- eigen.analysis(aq.96$A, zero=FALSE)
 eig.96
 
 
-## Plot methods
+## some Plot methods
 barplot(eig.96$stable.stage, col="blue", ylim=c(0,1), ylab="Proportion", xlab="Stage class", main="Stable stage distribution from 96-97 matrix")
 box()
-
 
 ymax<-max(eig.96$repro.value)*1.25
 barplot(eig.96$repro.value, col="green", ylim=c(0,  ymax ), xpd=FALSE, ylab="Reproductive value", xlab="Stage Class", main="Reproductive values")
 box()
 
-eig.96$elasticities
 
-## 0's with log-scale will cause warnings at end of demo 
-eig.96$elasticities[eig.96$elasticities==0]<-NA
+matplot2(eig.96$elasticities, type='b', ylab="Elasticity", legend="topleft", ltitle="Fate", main="Elasticity matrix")
 
-op<-par(mar=c(5,6,4,1))
-matplot(t(eig.96$elasticities), log='y', yaxt='n',
-xlab="Stage at time t",  ylab="",
-main="Elasticity matrix")
-axis(2, at=c(0.005, 0.01, 0.02, 0.05, 0.10, 0.20), labels=c("0.005", "0.01", "0.02", "0.05", "0.1", "0.2" ),
-las=1)
-legend(2,.02, colnames(eig.96$elasticities), pch=as.character(1:5), col=1:5, title="Fate at time t+1")
-mtext("Elasticity (log scale)",2, line=4)
-par(op)
 
-eig.96$sensitivities
-eig.96$sensitivities[eig.96$sensitivities==0]<-NA
-
-matplot(t(eig.96$sensitivities), log='y', yaxt='n',
-xlab="Stage at time t",  ylab="",
-main="Sensitivity matrix")
-axis(2, at=c( 0.001, 0.01,  0.1, 1), labels=expression(10^-3, 10^-2, 10^-1, 10^0) , las=1)
-legend(2,.01, colnames(eig.96$sensitivities), pch=as.character(1:5), col=1:5, title="Fate at time t+1")
-mtext("Sensitivity (log scale)",2, line=4)
+image2(eig.96$sensitivities, mar=c(1,3,5,1))
+title("Sensitivity matrix")
 
 
 # ---------------------------------------------------------------- #
@@ -227,23 +208,17 @@ caption("Eigen analysis of mean matrix")
 
 # split A into T and F (could change aq.matrix output, but fertility always in a15 and a25)
 
-aq.tf<-function(A){
-z<-matrix(c(rep(0,20), rep(1,2), rep(0,3)), nrow=5)
-list(T=(1-z)*A, F=z*A)
-}
+splitA(A.mean, r=1:2)
 
-x<-aq.tf(A.mean)
 
-x
-
-generation.time(x$T, x$F)
-net.reproductive.rate(x$T, x$F)
-fundamental.matrix(x$T)$N
+generation.time(A.mean, r=1:2)
+net.reproductive.rate(A.mean, r=1:2)
+fundamental.matrix(A.mean, r=1:2)$N
 
 caption("Age-specific traits from mean matrix")
 
 ## Check generation time for all matrices.  If F matrix is empty, generation time is Inf
-sapply(fill.A, function(A){x<-aq.tf(A); generation.time(x$T, x$F)})
+sapply(fill.A, generation.time, r=1:2)
 
 caption("Generation time for each projection matrix")
 

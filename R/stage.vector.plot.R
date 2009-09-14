@@ -19,7 +19,7 @@ stage.vector.plot<-function(stage.vectors, proportions=TRUE, legend.coords="topr
        if(is.null(ylim)){ylim=c(floor(min(p, na.rm=TRUE)), ceiling(max(p, na.rm=TRUE))) }
        plot(x, p[1,], type='n', ylim=ylim, xlab=xlab, ylab=ylab, ... )      
     }
-    ## order legend by descreasing order of mean number in stage vector
+    ## order legend by decreasing order of mean number in stage vector
     y<-sort(apply(p,1,mean, na.rm=TRUE), index.return=TRUE, decreasing=TRUE)
     for (i in y$ix )                ## Loop through stage classes
     {                 

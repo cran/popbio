@@ -57,13 +57,12 @@ stages<-c("seed", "sm.nr", "lg.nr", "repro")
 ## convert to list of 16 matrices
 A<-lapply(A, matrix, nrow=4, byrow=TRUE, dimnames=list(stages,stages))
 A[8]
-image2(A[[8]], round=8, mar=c(1,3,4,1))
-title( paste("M. cardinalis - ", names(A[8])), line=3)
+image2(A[[8]], round=8, mar=c(1,3,4.5,1))
+title( paste("M. cardinalis - ", names(A[8])), line=2.5)
 
-eigen.analysis(A[['Carlon pooled']])
 
 ## plot like figure 1A
-x<- matrix(sapply(lapply(A, eigen.analysis), '[[', "lambda1"), ncol=4)
+x<- matrix(sapply(A, lambda), ncol=4)
 colnames(x)<-c("BU",  "CA", "RP", "WA")
 rownames(x)<-c(2000:2002, "pooled")
 x<-x[,c(1,3,4,2)]

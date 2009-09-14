@@ -41,8 +41,12 @@ Sinauer, Sunderland, Massachusetts, USA.
 %\seealso{ \code{\link{vitalsim}}}
 \examples{
 data(whale)
-multiresultm(c(1,9,9,9),whale$T, whale$F)
-multiresultm(c(1,9,9,9),whale$T, whale$F)
+x<-splitA(whale)
+whaleT<-x$T
+whaleF<-x$F
+
+multiresultm(c(1,9,9,9),whaleT, whaleF)
+multiresultm(c(1,9,9,9),whaleT, whaleF)
 
 ## create graph similar to Fig 15.3 a
 reps <- 10    # number of trajectories
@@ -54,7 +58,7 @@ for (j in 1:reps)
    n <- nzero
    for (i in 1:tmax) 
    {
-      n <- multiresultm(n,whale$T,whale$F)
+      n <- multiresultm(n,whaleT,whaleF)
       totalpop[i,j] <- sum(n)
    } 
 } 

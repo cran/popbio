@@ -1,4 +1,43 @@
-changes in version 1.1.10 (2008-12-10)
+changes in version 2.0 (2009-9-14)
+
+	* split the six combined parts of eigen.analysis into separate
+	 functions (lambda, stable.stage, reproductive.value,
+	 damping.ratio, sensitivity, and elasticity).  Among other things,
+	 this makes it easier to apply the functions to a list of
+	 matrices.
+
+	* modified the three functions that calcuate age-specific traits
+	 (generation.time, net.reproductive.rate and fundamental matrix) to
+	accept a projection matrix as input (which is then split into
+	separate T and F matrices using the splitA function).  Again, this
+	makes it easier to apply the functions to a list of matrices.
+
+	* modified the 3 main datasets (teasel, tortoise, and whale) to
+	include only a projection matrix (and not separate T and F
+	matrices, since A can be split using splitA)
+
+	* added splitA function to  split/decompose a projection matrix into T and
+	F matrices
+
+	* added resample function to resample  a projection matrix
+	using a multinomial distribution for transitions and a log normal
+	distribution for fertilities
+
+	* added var2 function to calculate the variance of a list of
+	matrices (like mean.list, but variance is not generic, so var2)
+
+	* added matplot2 function to plot the rows of a matrix with a
+	legend included
+
+	* moved a number of long help examples that re-created plots in
+	Caswell (2001) to a single demo called Caswell.
+
+	* minor changes include updating lnorms, allowing NAs in image2
+	and projection.matrix, adding pooled matrix to calathea, changing
+	defaults for image2.
+	
+	
+changes in version 1.1.11 (2008-12-10)
 
 	* added image2 plot for projection, sensitivity and elasticity
 	matrices.  Examples were added to a number of help files.
@@ -123,11 +162,9 @@ changes in version 1.1.1 (2007-08-25)
 	* changed stage.vector.plot examples to project matrix in example
 	2.1 in Caswell and create figure 2.3.
 
-	###################
-
 changes in version 1.1  (2007-07-28)
 
-	* added new functions and datasets contirubted by Patrick Nantel
+	* added new functions and datasets contributed by Patrick Nantel
 
 	* added default row and column names (if missing) to
 	stage.vector.plot, checks for matrix with 2 or more stages, and

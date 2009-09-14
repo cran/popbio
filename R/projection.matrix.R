@@ -52,7 +52,7 @@ projection.matrix <-function(transitions, stage=NULL, fate=NULL, fertility=NULL,
       for (i in 1:n)                                  
       {                                                                                
          fert <- tapply(transitions[, fertility[i] ],        ## Summarize "stage i" fertility column 
-                        transitions[, stage], mean)[sort]    ## by classes to calculate mean fertility rates.
+                        transitions[, stage], mean, na.rm=TRUE)[sort]    ## by classes to calculate mean fertility rates.
          F_matrix[i, ] <- fert                               ## Add fertilities to i row of matrix
                                                                # skipping rows not allowed.
       }

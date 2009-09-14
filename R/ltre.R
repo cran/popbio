@@ -20,7 +20,7 @@ function(trts, ref)
      ## matrix halfway between treatment and reference
      Ac<-(A1+ref)/2
      ## sensitivity of Ac
-     SAc<-eigen.analysis(Ac)$sensitivities
+     SAc<-sensitivity(Ac)
      # matrix of contributions
      Cm<-Dm*SAc
      ## output matrix or list of matrices depending on number of trts     

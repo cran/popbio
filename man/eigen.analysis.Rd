@@ -14,14 +14,9 @@ eigen.analysis(A, zero=TRUE)
   \item{zero}{ Set sensitivities for unobserved transitions to zero }
 }
 \details{ The calculation of eigenvalues and eigenvectors partly follows
-  Matlab code in section 4.8.1 (p. 107) in Caswell (2001). 
-   
-  The built-in \code{\link{eigen}} function returns eigenvalues in descreasing
-order of magnitude or modulus.  The dominant eigenvalue of imprimitive
-matrices with \emph{d} eigenvalues of equal modulus is the one with the
-largest real part (\code{which.max(Re(eigen(A)$values))} ). The damping
-ratio is calculated by dividing the dominant eigenvalue by the second
-largest modulus (\code{\link{Mod}}).
+  Matlab code in section 4.8.1 (p. 107) in Caswell (2001).   Since
+  \code{popbio} version 2.0, each part returned by
+  \code{eigen.analysis} is now inlcuded as a separate function.
  }
 
 \note{ If matrix A is singular, then \code{eigen.analysis} will return
@@ -71,16 +66,15 @@ stage.vector.plot(pop.projection(A, c(1,1,1), 10)$stage.vectors)
 
 ### Teasel
 data(teasel)
-teaselA<-teasel$T + teasel$F
-a<-eigen.analysis(teaselA)
+a<-eigen.analysis(teasel)
 a
 barplot(a$stable.stage, col="green", ylim=c(0,1), 
        ylab="Stable stage proportion", xlab="Stage class", main="Teasel")
 box()
 
 op<-par(mfrow=c(2,2))
-image2(teaselA, cex=.8, mar=c(0.5,3,4,1) )
-title("Projection matrix", line=3)
+image2(teasel, cex=.8, mar=c(0.5,3,4,1) )
+title("Teasel projection matrix", line=3)
 
 image2(a$elasticities, cex=.8, mar=c(0.5,3,4,1) )
 title("Elasticity matrix", line=3)
@@ -90,7 +84,7 @@ image2(a$sensitivities, cex=.8, mar=c(0.5,3,4,1) )
 title("Sensitivity matrix 1", line=3)
 
 ## use zero=FALSE to get sensitivities of all elements
-image2(eigen.analysis(teaselA, zero=FALSE)$sensitivities, cex=.8, mar=c(0.5,3,4,1) )
+image2(eigen.analysis(teasel, zero=FALSE)$sensitivities, cex=.8, mar=c(0.5,3,4,1) )
 title("Sensitivity matrix 2", line=3)
 par(op)
 

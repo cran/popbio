@@ -23,15 +23,14 @@ analysis. Sinauer, Sunderland, Massachusetts, USA.
 
 \examples{
 data(hudsonia)
-## various ways to return lambda1 for each year
-sapply(hudsonia, function(x) eigen.analysis(x)$lambda1)
-#sapply(hudsonia, eigen.analysis)["lambda1",]
-#sapply(lapply(hudsonia, eigen.analysis), "[[", "lambda1")
+sapply(hudsonia, lambda)
 
 ## mean matrix 
 x<-mean(hudsonia)
-image2(x, mar=c(1,4,4,1))
-eigen.analysis(x)$lambda1
-
+image2(x, mar=c(1,4,5.5,1))
+title("Hudsonia mean matrix", line=2.5)
+lambda(x)
+# variance
+var2(hudsonia)
 }
 \keyword{datasets}

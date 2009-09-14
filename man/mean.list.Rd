@@ -24,7 +24,7 @@
 \author{Chris Stubben }
 \note{ S3 method for the \code{\link{mean}} of a list of
   matrices. }
-%\seealso{  }
+\seealso{ \code{\link{var2}}  }
 \examples{
 data(hudsonia)
 mean(hudsonia)

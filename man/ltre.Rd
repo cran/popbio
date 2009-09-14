@@ -40,30 +40,21 @@ A.L. Angert. 2006. Demography of central and marginal
 populations of monkeyflowers (Mimulus cardinalis and
 M. lewisii). Ecology 87:2014-2025.
 
-The example below also includes variance decomposition in a random
-design using killer whale from Caswell (2001).
+Check the \code{demo(Caswell)} for variance decomposition in a random
+design using killer whale.
+
 
 }
 % \seealso{   }
 \examples{
 #######  Calathea ovandensis
 data(calathea)
-## Pooled matrix, all plots and years in Table 8 in Horvitz and Schemske (1995).
-calathea_pool <- matrix(c(
-0.4983, 0,      0.5935, 7.139, 14.2715, 24.6953, 34.9027, 40.5437,
-0.0973, 0.0110, 0.0191, 0,      0,       0,       0,      0,
-0.0041, 0.0442, 0.3378, 0.0698, 0.0251,  0.0065,  0.0085, 0,
-0,      0.0014, 0.1355, 0.4286, 0.1736,  0.0968,  0.0427, 0.0435,
-0,      0,      0.0363, 0.3841, 0.6025,  0.4258,  0.2991, 0.2174,
-0,      0,      0.0019, 0.0254, 0.113,   0.2387,  0.1709, 0.2826,
-0,      0,      0,      0.0095, 0.0272,  0.1548,  0.3248, 0.1957,
-0,      0,      0,      0.0032, 0.0063,  0.0452,  0.1282, 0.2391)
-, nrow=8, byrow=TRUE)
+calathea_pool<-calathea[['pooled']]
 
 ## Create plots like FIGURE 7 in Horvitz et al 1997
 ##PLOTS
-plots<- split(calathea, rep(1:4,each=4))
-## use Mean matrix since pooled not available
+plots<- split(calathea[-17], rep(1:4,each=4))
+## use Mean matrix since pooled not available by plot
 plots<- lapply(plots, mean)
 Cm<-LTRE(plots, calathea_pool)
 pe<-sapply(Cm, sum)
@@ -74,7 +65,7 @@ box()
 title(expression(italic("Calathea ovandensis")))
 
 ##YEARS -- split recycles vector
-yrs<-split(calathea, 1:4)
+yrs<-split(calathea[-17], 1:4)
 yrs <- lapply(yrs, mean)
 names(yrs)<-1982:1985
 Cm<-LTRE(yrs, calathea_pool)
@@ -85,7 +76,7 @@ box()
 title(expression(italic("Calathea ovandensis")))
 
 ## INTERACTION
-Cm<-LTRE(calathea, calathea_pool)
+Cm<-LTRE(calathea[-17], calathea_pool)
 ie<-sapply(Cm, sum)
 ## minus plot, year effects
 ie<- ie - rep(pe, each=4) - rep(ye, 4)
@@ -137,31 +128,6 @@ box()
 par(op)
 
 
-#######  Random design and variance decomposition
-data(whale)
-pods<- whale$pods
-## Covariance matrix
-p1<-matrix(unlist(pods), nrow=18, byrow=TRUE)
-# addcolumn names
-colnames(p1)<- paste("a", rep(1:4,each=4), 1:4, sep="")
-## re-order columns to plot matrix by columns 
-x<- order(paste("a", 1:4, rep(1:4,each=4), sep=""))
-p1<-p1[,x]
-covmat<- cov(p1)
-
-## plots matching figure 3 in Brault & Caswell 1993 or figure 10.10 in Caswell 2001 (p 272)
-persp(covmat, theta=45, phi=15, box=FALSE,
- main=expression("Killer Whale Covariances"))
-w1<- matrix(apply(p1, 2, mean), nrow=4)
-wS<-eigen.analysis(w1, zero=FALSE)$sensitivities
-## V matrix of contributions
-contmat <- covmat * c(wS) \%*\% t(c(wS))
-persp(contmat, theta=45, phi=15, box=FALSE,
-main=expression(paste("Contributions to V(", lambda, ")")) )
-## contributions of V associated with aij  (matrix on page 271 in Caswell)
-A<-matrix(apply(contmat, 2, mean), nrow=4)
-dimnames(A)<-dimnames(whale$T)
-round(A/sum(A),3)
 }
 \keyword{ survey }
 

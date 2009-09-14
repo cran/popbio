@@ -22,7 +22,7 @@ vrs <- vrmeans
 meanmx<-makemx(vrs)                      # create mean matrix using function
 #
 Nstart <- sum(n0)	                 # starting population number
-lam0 <- eigen.analysis(meanmx)$lambda1    # find the deterministic population growth rate (mean matrix)
+lam0 <- lambda(meanmx)                   # find the deterministic population growth rate (mean matrix)
 #-------------------------------------------------------------------------------
 # this section makes sets of beta or strecthed beta values to choose
 # from during the simulations. It makes 99 values for 1
@@ -183,7 +183,9 @@ stochLam  <- matrix(0,runs,1)    # tracker of stochastic lambda values
         index[index == 100] <- 99
         vrs[vrtypes != 3]   <- diag(parabetas[index,vrtypes != 3])  # find stored value
                                             # calculate a lognormal value
-        vrs[vrtypes == 3]   <- lnorms(vrmeans[vrtypes == 3],vrvars[vrtypes == 3], yrxy2) 
+        #vrs[vrtypes == 3]   <- lnorms(vrmeans[vrtypes == 3],vrvars[vrtypes == 3], yrxy2)
+         vrs[vrtypes == 3]   <- lnorms(yrxy2, vrmeans[vrtypes == 3],vrvars[vrtypes == 3]) # updated lnorms
+        
         mx  <- makemx(vrs)                  # use matrix definition function to make yearly matrix
         nt <- mx %*% nt	 	            # multiply matrix by the population vector
         if (extinct == 0)                   # check for extinction

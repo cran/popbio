@@ -32,8 +32,9 @@ multiresultm <- function(n,T,F,varF=NULL)
               ni  <- n[j]                         # extract entry j of vector n
               for (i in 1:length(fj)) {
                 if (F[i,j] > 0) {          # skip if fertility is null
-                  rawelems <- rnorm(ni,0,1)
-                  rndfert  <- lnorms(F[i,j],varF[i,j],rawelems) # make lognormal random fertilities
+                 
+                    # rndfert  <- lnorms(F[i,j],varF[i,j],rnorm(ni,0,1)) # make lognormal random fertilities
+                      rndfert  <- lnorms(ni, F[i,j],varF[i,j])   # updated lnorms in version 2.0
                   offspring[i,j] <- sum(rndfert)   # computes number of offsprings from fertilities
                 } # end if
               } # end for i

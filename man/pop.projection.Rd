@@ -46,21 +46,21 @@ A<-matrix(c(
 n<-c(5,5,5)
 p<-pop.projection(A,n, 15)
 p
-eigen.analysis(A)$damping.ratio
+damping.ratio(A)
 stage.vector.plot(p$stage.vectors, col=2:4)
 
 
 ####
 
 data(whale)
-A<-whale$T+whale$F
+A<-whale
 #n<-c(4,38,36,22)
 n<-c(5,5,5,5)
 p<-pop.projection(A,n, 15)
 p
 stage.vector.plot(p$stage.vectors, col=2:4, ylim=c(0, 0.6))
 ## convergence is slow with damping ratio close to 1
-eigen.analysis(A)$damping.ratio
+damping.ratio(A)
 pop.projection(A,n, 100)$pop.changes
 }
 \keyword{ survey }

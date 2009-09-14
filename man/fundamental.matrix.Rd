@@ -8,10 +8,12 @@ Age-specific survival calculations from stage-classified matrices.  Includes the
 
 }
 \usage{
-fundamental.matrix(T)
+fundamental.matrix(A, \dots)
 }
 \arguments{
-  \item{T}{ A transition matrix only (without  fertilities) }
+  \item{A}{ projection matrix }
+  \item{\dots}{ additional items are passed to \code{\link{splitA}}
+      and are used to split A into T and F matrices }
 }
 \details{
  see section 5.3.1 in Caswell (2001).
@@ -31,7 +33,7 @@ fundamental.matrix(T)
 \examples{
 
 data(whale)
-fundamental.matrix(whale$T)
+fundamental.matrix(whale)
 
 }
 \keyword{ survey }

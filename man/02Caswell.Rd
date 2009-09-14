@@ -7,23 +7,27 @@
 \bold{Chapter 2}.  Age-classified matrix models
 \describe{
 \item{ \code{\link{pop.projection}} }{ section 2.2.   Projection of
-    population growth rates.  See  \code{\link{stage.vector.plot}} to
-    plot stage (or age) vectors}
+    population growth rates.  }
 }
 
 \bold{Chapter 4}.  Stage-classified matrix models
 \describe{
-\item{ \code{\link{eigen.analysis}} }{ section 4.8.   Computation of
-    eigenvalues and eigenvectors.  Returns the dominant eigenvalue
-    (section.4.4), stable stage distribution (section 4.5),
-    reproductive value (section 4.6), and damping ratio (section 4.7)}
+\item{ \code{\link{lambda}} }{ section 4.4. Returns the dominant eigenvalue    }
+\item{ \code{\link{stable.stage}} }{ section 4.5. Returns the stable
+    stage distribution (right eigenvector)    }
+\item{ \code{\link{reproductive.value}} }{ section 4.6. Returns the
+    reproductive value (left eigenvector)   }
+\item{ \code{\link{damping.ratio}} }{ section 4.7. Returns the damping
+  ratio }
+\item{ \code{\link{eigen.analysis}} }{ section 4.8.   Computes
+    eigenvalues and vectors, including the dominant eigenvalue , 
+    stable stage distribution, reproductive value, damping
+    ratio, sensitivities, and elasticities.  Since version 2.0, these
+    are now included as separate functions as well }
 }
 
 \bold{Chapter 5}.  Events in the Life Cycle
 \describe{
-\item{ \code{\link{whale}} }{   Figures 5.1 and 5.2. The example
-    includes code to calculate age-specific
-    survivorship and fertility curves.  }
 \item{ \code{\link{fundamental.matrix}} }{   section 5.3.1.
     Calculate age-specific survival from a stage classified matrix
     using the fundamental matrix N }
@@ -32,8 +36,10 @@
     using the dominant eigenvalue of the matrix R.  }
 \item{ \code{\link{generation.time}} }{ section 5.3.5.   Calculate the
     generation time of a stage-classified matrix  }
-
 }
+Age-specific  survivorship and fertility curves in Fig 5.1 and 5.2 are
+now included in \code{demo(Caswell)}.  
+
 
 \bold{Chapter 6}. Parameter estimation
 \describe{
@@ -44,15 +50,12 @@
     matrix from a time series of  individuals per stage using Wood's
     quadratic programming method.  Requires \code{quadprog} library.}
 }
-See the \code{Rcapture} package for capture-recapture methods
-described in section 6.1.2. 
+
 
 \bold{Chapter 9}.  Sensitivity analysis
 \describe{
-\item{ \code{\link{eigen.analysis}} }{ section  9.1, and 9.2.
-    Calculate sensitivities and elasticities.  The examples in the
-    \link{teasel} and \link{tortoise} datasets also include code to
-    sum elasticities and create figures like 9.3, 9.4, and 9.11. }
+\item{ \code{\link{sensitivity}} }{ section  9.1. Calculate sensitivities. }
+\item{ \code{\link{elasticity}} }{ section  9.2. Calculate elasticities. }
 }
 See the \code{secder} function in the \code{demogR} package for second derivatives of eigenvalues
 described in section 9.7 
@@ -60,17 +63,18 @@ described in section 9.7
 \bold{Chapter 10}.  Life Table Response Experiments
 \describe{
 \item{ \code{\link{LTRE}} }{ section 10.1 and 10.2.  Fixed designs in
-    LTREs.  The example includes code for variance
-    decomposition in random design. }
-
+    LTREs.  See  \code{demo(Caswell)} for variance
+    decomposition in random design (Fig 10.10). } 
 }
 
 
 \bold{Chapter 12}.  Statistical inference
 \describe{
-\item{ \code{\link{boot.transitions}} }{ section 12.1.5.5.  
-    Methods to bootstrap observed census transitions and calculate 
-    confidence intervals using \code{\link{quantile}} }
+\item{ \code{\link{boot.transitions}} }{ section 12.1.4.  Resample
+    observed census transitions in a stage-fate data frame   }
+\item{ \code{\link{resample}} }{ section 12.1.5.2.  Resample transitions
+    in a projction matrix from a multinomial distribution (and fertilites from a log
+    normal)} 
 }
 
 
@@ -91,12 +95,7 @@ stochastic growth rate described in section 14.4.
     demographic stochasticity into population projections.  The
     example uses the \link{whale} dataset to create a plot like figure
     15.3. }
-
 }
-
-
-
-
 
 }
 \author{Chris Stubben}

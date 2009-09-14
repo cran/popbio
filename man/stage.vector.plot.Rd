@@ -48,10 +48,10 @@ ylim=c(.01, 10), log='y', legend="bottomright", yaxt='n')
 pwrs<- -2:1
 # major ticks
 axis(2, at = 10^pwrs, labels=parse(text=paste("10^", pwrs, sep = "")),
-las=1, tcl= -.8)
+las=1, tcl= -.6)
 # minor ticks
 axis(2, at = 1:9 * rep(10^pwrs[-1] / 10, each = 9),
-    tcl = -0.4, labels = FALSE)
+    tcl = -0.3, labels = FALSE)
 
 }
 \keyword{ survey }
