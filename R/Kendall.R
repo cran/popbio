@@ -35,8 +35,9 @@ Kendall<-function(rates, grades=1000, maxvar=0.2,minvar=0.00001, maxmean=1, minm
       for (tt in 1:times)                              # calculate -loglikelihood for each year
       { 
          # this uses the -log-likelihood formula from Kendall:
-         newlogL <- -log(beta(aa + dat[tt,4],dat[tt,3]- dat[tt,4] + bb)/beta(aa,bb))
+         newlogL <-  -log(beta(aa + dat[tt,4],dat[tt,3]- dat[tt,4] + bb)/beta(aa,bb))       
          loglikli <- newlogL + loglikli                # add up the -log-likelihoods for each year
+       
       } 
       # the lines below summarize the results
       minLL    <- min(loglikli,na.rm = TRUE)           # what is the best log-liklihood?

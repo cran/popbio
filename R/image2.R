@@ -34,7 +34,7 @@ Some blocks may be unfilled or some colors may not be used")}}
 
    ## PLOT rectangles
    offset<-box.offset/2
-   plot(seq(1, x1+1, len=2), seq(1, y1+1, len=2), type='n', axes=FALSE, ann=FALSE)
+   plot(seq(1, x1+1, len=2), seq(1, y1+1, len=2), type='n', axes=FALSE, ann=FALSE, xaxs='i', yaxs='i')
    for(i in 1:x1)
    {
       for(j in 1:y1)

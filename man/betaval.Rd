@@ -68,7 +68,7 @@ for (i in 1:3)
    h<-hist(x[i,], plot=FALSE, breaks=seq(0,1,.02)  )
    lines(h$mids, h$counts/1000, type='l', col=1+i, lwd=2, lty=i)
 }
-legend(.6,.4, c("(0.50, 0.05)", "(0.50, 0.25)", "(0.50, 0.45)"),
+legend(0.5,0.4, c("(0.50, 0.05)", "(0.50, 0.25)", "(0.50, 0.45)"),
 lty=1:3, lwd=2, col=2:4, title="mean and sd")
 }
 

@@ -5,7 +5,7 @@
 \title{  Plot a matrix}
 \description{
 Plot the rows of a matrix.  Useful for displaying a matrix of stage vectors,
-survival rates, sensititivies and so on.
+survival rates, sensitivities and so on.
 }
 \usage{
 matplot2(x, proportions = FALSE, legend = "topright", 

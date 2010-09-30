@@ -13,16 +13,20 @@ splitA(A, r = 1, c = -1)
 }
 \arguments{
   \item{A}{ a projection matrix}
-  \item{r}{ rows containing fertilities, default is first row}
+  \item{r}{ rows containing fertilities (default is first row)  OR a
+       logical matrix  where TRUE is the location of a fertility value
+       OR a complete fertility matrix }
   \item{c}{ columns containing fertilities, default is all columns
       except first}
 }
 \details{ see section 5.1 in Caswell (2001) }
 
 \note{ By default, the fertility matrix will include elements in the first row (except first
-  element).   In a prebreeding census, it may be possible  to have
-  matrix elements that include both fertility and transition rates and
-therefore this function will not work.  }
+  element).   In some cases, it is not possible to split a projection matrix
+  using only row and column indexes.   Therefore,  a
+  logical matrix (where TRUE is the location of a fertility value) or
+  the complete fertility matrix  is also accepted (and T is just A-F)
+}
 
 \value{ A list with T and F matrices}
 
@@ -46,7 +50,11 @@ data(teasel)
 splitA(teasel, r=1:6, c=6)
 # hudsonia - fertilities in first two columns
 data(hudsonia)
-splitA(hudsonia[[1]], r=1:2)
+A<-hudsonia[[1]]
+splitA(A, r=1:2)
+## example using a logical matrix (if fertilities were in the upper diagonal)
+splitA(A, row(A)<col(A))
+
 # survival curves
 x<-sapply(hudsonia, function(x) colSums(splitA(x, r=1:2)$T))
 matplot2(t(x), legend="bottomright", ylab="Survival", 

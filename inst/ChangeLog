@@ -1,3 +1,12 @@
+changes in version 2.1 (2010-9-30)
+
+	* added option to split A using a logical matrix since row and
+	column indexes will not always work.
+
+	* created vignette describing two ways (using scan or read.table)
+	to load projection matrices into R.  Try vignette("load_A_matrix")
+
+
 changes in version 2.0 (2009-9-14)
 
 	* split the six combined parts of eigen.analysis into separate
@@ -6,7 +15,7 @@ changes in version 2.0 (2009-9-14)
 	 this makes it easier to apply the functions to a list of
 	 matrices.
 
-	* modified the three functions that calcuate age-specific traits
+	* modified the three functions that calculate age-specific traits
 	 (generation.time, net.reproductive.rate and fundamental matrix) to
 	accept a projection matrix as input (which is then split into
 	separate T and F matrices using the splitA function).  Again, this
