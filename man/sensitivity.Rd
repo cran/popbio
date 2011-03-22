@@ -20,7 +20,7 @@ sensitivity(A, zero=FALSE)
 %\note{ }
 
 \value{
- Asensitivity matrix 
+ A sensitivity matrix 
 }
 \references{
 Caswell, H. 2001. Matrix population models: construction, analysis,

@@ -1,10 +1,15 @@
+changes in version 2.2 (2011-3-22)
+
+	* added srt to control label rotation in image2
+	* compressed aq.trans and aq.census to avoid warnings in new R version 
+
 changes in version 2.1 (2010-9-30)
 
 	* added option to split A using a logical matrix since row and
 	column indexes will not always work.
 
 	* created vignette describing two ways (using scan or read.table)
-	to load projection matrices into R.  Try vignette("load_A_matrix")
+	to load projection matrices into R.  Try vignette("load_matrix")
 
 
 changes in version 2.0 (2009-9-14)

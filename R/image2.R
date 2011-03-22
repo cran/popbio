@@ -1,6 +1,6 @@
 image2<-function(x, col=c('white', rev(heat.colors(23))),  breaks, log=TRUE,
                  border=NA, box.offset=0.1, round=3, cex, text.cex=1, text.col="black",
-                 mar=c(1,3,3,1),  labels=2:3, label.offset=0.1, label.cex=1 )
+                 mar=c(1,3,3,1),  labels=2:3, label.offset=0.1, label.cex=1, srt=90 )
 {
    ## convert vector like 1:5 to matrix with 1 row (default is one column) else convert data.frame to matrix
    if(!is.matrix(x)){ if(is.vector(x)){ x<-matrix(x, nrow=1) } else{x<-as.matrix(x)} }
@@ -49,7 +49,7 @@ Some blocks may be unfilled or some colors may not be used")}}
    if(2 %in% labels) text(1-label.offset,    1:y1+.5, rownames(x), pos=2, offset=0, cex=label.cex)  ## on left
    if(4 %in% labels) text(x1+1+label.offset, 1:y1+.5, rownames(x), pos=4, offset=0, cex=label.cex)
    ## colnames (bottom and top)
-   if(1 %in% labels) text(1:x1+.5, 1-label.offset,    colnames(x), pos=2, offset=0, srt=90, cex=label.cex)
-   if(3 %in% labels) text(1:x1+.5, y1+1+label.offset, colnames(x), pos=2, offset=0, srt=270, cex=label.cex)
+   if(1 %in% labels) text(1:x1+.5, 0.9-label.offset,    colnames(x), pos=2, offset=0, srt=(0+srt), cex=label.cex)
+   if(3 %in% labels) text(1:x1+.5, y1+1.1+label.offset, colnames(x), pos=2, offset=0, srt=(360-srt), cex=label.cex)
    par(op)
  }

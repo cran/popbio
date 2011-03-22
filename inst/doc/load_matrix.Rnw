@@ -226,7 +226,7 @@ head(pods)
 @ 
 
 Third, enter the  projection matrix from Fig 1 in Brault and Caswell (1993) into an expression.
-The symbols in this matrix must match the column names in the matrix
+The symbols in this expression must match the column names in the matrix
 of pod-specific rates above.  An alternative is to copy the matrix using \Rcmd{scan} and
 then \Rcmd{parse} the output into an expression. 
 
@@ -430,7 +430,7 @@ sapply(arel, lambda)
 \subsection*{Loading matrices expressed as vital rates}
 
 In this final example, a table of vital rates (with html
-markup) are used to construct matrix models of six  \emph{Orchis
+markup) is used to construct matrix models of six  \emph{Orchis
   purpurea} populations from Jacquemyn et al. (2010).  The following
 code downloads and formats the vital rate table.
 

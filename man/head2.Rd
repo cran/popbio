@@ -17,7 +17,7 @@ head2(x, head = 3, tail = 1, dotrows = 1)
 }
 %\details{}
 \value{
- An smaller object like \code{x} with first and last rows only
+ A smaller object like \code{x} with first and last rows only
 }
 \author{ Chris Stubben }
 

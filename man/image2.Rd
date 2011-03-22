@@ -9,7 +9,7 @@
 image2(x, col = c("white", rev(heat.colors(23))), breaks, log = TRUE,
  border = NA, box.offset = 0.1, round = 3, cex, text.cex = 1, 
  text.col = "black", mar = c(1, 3, 3, 1), 
- labels = 2:3, label.offset = 0.1, label.cex = 1)
+ labels = 2:3, label.offset = 0.1, label.cex = 1, srt = 90)
 }
 \arguments{
   \item{x}{ A numeric matrix with row and column names }
@@ -33,7 +33,7 @@ image2(x, col = c("white", rev(heat.colors(23))), breaks, log = TRUE,
       3=top, 4=right) for row and column labels }
   \item{label.offset}{ Amount of space between label and boxes }
   \item{label.cex}{ Magnification size of labels }
-
+  \item{srt}{ String rotation for labels on top and bottom of matrix }
 }
 \details{
   The minimum value in \code{x} is usually assigned to the first color
