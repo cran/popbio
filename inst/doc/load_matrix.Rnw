@@ -1,4 +1,4 @@
-%\VignetteIndexEntry{Loading projection matrices}
+% \VignetteIndexEntry{Loading projection matrices}
 \documentclass[12pt]{article}
 
 \usepackage{Sweave}
@@ -17,7 +17,7 @@
 
 \begin{document}
 \maketitle
-\SweaveOpts{prefix.string=plot, strip.white=FALSE}
+\SweaveOpts{prefix.string=plot, strip.white=false}
 
 %% for cutting and pasting use continue =""
 
@@ -116,12 +116,23 @@ is filled by columns, but usually values are copied by rows, so the
 
 <<ceco>>=
 stages <- c("seedling", "vegetative", "flowering")
-ceco<-matrix(ceco, nrow=3, byrow=TRUE, 
-                  dimnames=list(stages,stages))
-ceco
+matrix(ceco, nrow=3, byrow=TRUE, dimnames=list(stages,stages))
+
 
 @ 
 
+One of the nice features of \R~is the ability to create new
+functions.  If the \Rcmd{matrix} command above is too tedious, you can
+add your own function to simplify the creation of square
+matrices. The \Rcmd{matrix2} command is also included in the latest
+version of \Rcmd{popbio 2.3}.
+
+<<ceco, eval=FALSE>>=
+matrix2<-function(x, stages, byrow=TRUE){
+   matrix(x, nrow=sqrt(length(x)), byrow=byrow, dimnames=list(stages, stages))
+}
+ceco<-matrix2(ceco, stages)
+@ 
 
 One final step after copying and pasting a matrix into \R~is to save
 the matrix to a file for future analyses (and to avoid copying and
@@ -163,7 +174,7 @@ Flowering adult 0.0000 (0) 0.0000 (0) 0.1802 (6) 0.1610 (1)
 In~\R, you can use the \Rcmd{grep} function and a regular expression
 to list only  elements with digits or a decimal point.  The matching
 elements are then converted to a numeric vector and the results are
-reshaped into a matrix.  In addition, stages (in position 1,
+reshaped into a square matrix.  In addition, stages (in position 1,
 10, 19, 29) are assigned to the row and column names.  It is usually a
 good idea to check the matrix by calculating lambda, elasticities, or other values
 reported in the original paper.  In this case, the elasticities below
@@ -173,8 +184,7 @@ to recruit transition).
 
 <<sapu>>=
 stages<-x1[c(1,10,19,29)]
-sapu<-matrix( as.numeric(grep("^[0-9.]+$", x1, value = TRUE)), nrow=4,byrow=TRUE, 
- dimnames=list(stages,stages))
+sapu<-matrix2( as.numeric(grep("^[0-9.]+$", x1, value = TRUE)), stages)
 sapu
 round(elasticity(sapu)*100)
 @ 
@@ -185,11 +195,9 @@ round(elasticity(sapu)*100)
 In some cases, matrix elements from multiple sites or years will be
 listed in a table,  and often these tables will only include transitions with non-zero elements.  There are a few ways
 to create a projection matrix from these tables, but I'll focus on using a expression of matrix
-elements since this technique is so useful in many other situations (e.g.,
-using an expression of vital rates to calculate vital rate
-sensitivities.  See the final example in this guide).
+elements since this technique is useful in many other situations.
 
-In this final \Rcmd{scan} example, first copy the pod-specific matrix elements for
+First copy the pod-specific matrix elements for
 killer whales from the appendix in Brault and Caswell (1993).
 
 
@@ -216,7 +224,8 @@ I31 7 1.0000 0.0714 0.0485 0.9286 0.9515 0.9810 0.0047 0.1273
 R01 20 1.0000 0.0595 0.0485 0.8929 0.9515 1.0000 0.0024 0.0797
 \end{Sinput}
 
-Second, format the rates into a numeric matrix and add row and column labels.
+Second, format the scanned values into a matrix, select only the pod rates (by
+skipping the first row and first two columns),  and add row and column labels.
 
 <<pods>>=
 x2<-matrix(x2, nrow=19, byrow=TRUE)
@@ -225,56 +234,42 @@ dimnames(pods)<-list(x2[-1,1], x2[1,-(1:2)] )
 head(pods)
 @ 
 
-Third, enter the  projection matrix from Fig 1 in Brault and Caswell (1993) into an expression.
+Third, enter the  projection matrix from Fig 1 in Brault and Caswell
+(1993) into an expression and include the commands to convert the
+values into a square matrix with stage class names.
 The symbols in this expression must match the column names in the matrix
-of pod-specific rates above.  An alternative is to copy the matrix using \Rcmd{scan} and
-then \Rcmd{parse} the output into an expression. 
+of pod-specific rates above.  
 
-<<podA>>=
-
+<<podA, keep.source=TRUE>>=
 podA<-expression(
-0,  F2, F3, 0,
-G1, P2, 0,  0,
-0,  G2, P3, 0,
-0,  0,  G3, P4)
+  matrix2( c(
+   0,  F2, F3, 0,
+   G1, P2, 0,  0,
+   0,  G2, P3, 0,
+   0,  0,  G3, P4), 
+    c("yearling", "juvenile", "mature", "postreprod"))) 
 @
 
-
-Fourth,  apply the \Rcmd{eval} function to the \R~expression using a list of
-matrix elements to get a vector of all 16 matrix elements from a single pod.
- For example, convert the matrix elements in the first row
-to a list using \Rcmd{as.list} and then use \Rcmd{sapply} to evaluate
-the expression in \Rcmd{podA} across each listed element.  
-
-
+Fourth, evaluate the the \R~expression using a \Rcmd{list} of
+matrix elements in the first row to get a projection matrix from a single pod.
+ 
 <<J01>>=
-J01 <- sapply(podA, eval, as.list(pods[1,]))
+J01 <- eval(podA, as.list(pods[1,]))
 J01
 @ 
 
-Fifth, arrange the resulting vector into a projection matrix.
-<<J01matrix>>=
 
-stages<-c("yearling", "juvenile", "mature", "postreprod")
- matrix(J01, nrow = 4, dimnames = list(stages, stages), byrow=TRUE)
-@
-
-
-Finally, you can combine the previous two steps in a loop and create
+Finally, you can include the previous step in a loop and create
 projection matrices for all 18 pods. The dotplot in Figure~\ref{whales}
 displays the pod-specific population growth rates.
 
-
 <<whales, fig=TRUE, height=4, width=4, include=FALSE>>=
-
 whales <- vector("list", 18)
  names(whales) <- rownames(pods)
  for (i in 1:18) {
-  whales[[i]] <- matrix(sapply(podA, eval, as.list(pods[i,])), nrow = 4, byrow=TRUE, dimnames = list(stages, stages))
+  whales[[i]] <- eval(podA, as.list(pods[i,]))
 }
-
 print(dotplot( sort(  sapply(whales, lambda)), xlab="Growth rate"))
-
 @ 
 
 
@@ -293,7 +288,7 @@ print(dotplot( sort(  sapply(whales, lambda)), xlab="Growth rate"))
 Perhaps the most common way to load a projection matrix is to read the
 matrix from a file using \Rcmd{read.table}.  In this case, the file
 may be stored locally or on the web and these files may include one or
-more projection matrices in each file. The formats of the files will
+more projection matrices. The formats of the files will
 also vary, so it is often necessary to check and modify some of the
 default \Rcmd{read.table} options.
 
@@ -392,7 +387,7 @@ x<-gsub("(.*>)([0-9.]+)(<.*)", "\\2", arel[y] )
 x<-matrix(as.numeric(x), nrow=13, byrow=TRUE)
 stages=c("SD","SG", "SJ", "MJ", "LJ", "PR", "SA", "LA")
 
-FE99<-matrix(x[1,], nrow=8, byrow=TRUE, dimnames=list(stages,stages))
+FE99<-matrix2( x[1,], stages)
 image2(FE99, cex=.5)
 
 @ 
@@ -406,9 +401,6 @@ image2(FE99, cex=.5)
      \label{fe99}
 \end{figure}
 
-
-
-
 You can also split the 13 matrices and format them into a single list
 using \Rcmd{split}.     The final steps below are use to add the population and year to
 the list names and  to display a vector of growth rates. 
@@ -416,13 +408,12 @@ the list names and  to display a vector of growth rates.
 <<arel3>>=
 
 arel<-split(x,1:13)
-arel<-lapply(arel, matrix, nrow=8,  byrow=TRUE, dimnames=list(stages,stages))
+arel<-lapply(arel, matrix2, stages)
 
 years<-c("99", "00", "01")
 sites<-c("FE", "TF", "HF", "AT")
 pop<-c(paste(rep(sites, each=3), years, sep=""), "ST99")
 names(arel)<-pop
-
 sapply(arel, lambda)
 @
 
@@ -440,9 +431,7 @@ url<-"http://www.esapubs.org/archive/ecol/E091/011/appendix-B.htm"
 
 vrx<-readLines(url)
 
-## remove html
-
-# find lines with numbers between html tags
+## find lines with numbers between html tags
 y<-grep(">[0-9.]+<",  vrx, perl=TRUE)  
 
 ## remove html and save matrix elements
@@ -458,41 +447,24 @@ colnames(vr)<-c("psi",  "up", "pi", "ep", "d1", "d2", "d3", "d4", "d5", "d6", "g
 
 vr[1:5,1:5]
 @
-
 Next, format the matrix of vital rates listed in equation 1 into an
-expression (because of the Greek symbols,  I manually formatted
-this expression instead of copying and pasting).  Finally, 
-apply the \Rcmd{eval} function to the \R~expression using a list of
-vital rates from a single site (arranged in rows) to
-return a single matrix.  You can also create a list of all 30 matrices
-following the code in the earlier killer whale example or even
-calculate vital rate sensitivities and elasticities using the
-\Rcmd{vitalsens} function in \Rcmd{popbio}. 
+expression.  Finally,  evaluate the \R~expression using a list of
+vital rates from a single site to return a projection matrix.  You can also create a list of all 30 matrices
+following the code in the earlier killer whale example.
 
-<<orchid>>=
-
-## Orchis purpurea  eq. 1
-orpu<-expression(
+<<orchid, keep.source=TRUE>>=
+orpu<-expression( matrix2( c(
 0,  0,  0,          0,              0,          psi*up*pi*ep,
 d1, 0,  0,          0,              0,          0,
 0,  d2, 0,          0,              0,          0,
 0,  0,  d3*(1-g53), d4*(1-g54-g64), 0,          0,
 0,  0,  d3*g53,     d4*g54,         d5*(1-g65), d6*g56,
 0,  0,  0,          d4*g64,         d5*g65,     d6*(1-g56)
+    ), c("pcorm", "tuber", "sdlng", "juv", "nonfl", "flwer"))
 )
-
-
-## create matrices...
-
-stages<-c("pcorm", "tuber", "sdlng", "juv", "nonfl", "flwer")
-
-s1<-matrix( sapply( orpu, eval, as.list(vr[1,]) ), nrow=6, byrow=TRUE, dimnames=list(stages,stages))
+s1<-eval(orpu, as.list(vr[1,]) )
 s1
-lambda(s1)
 @
-
-
-
 
 
 
@@ -510,7 +482,6 @@ nonstationary matrix models. Ecological Applications 16:51-61.
 Jacquemyn, H., R. Brys, E. Jongejans 2010. Seed limitation restricts
 population growth in shaded populations of a perennial woodland
 orchid. Ecology. 91:119-129.
-
 
 Koop, A.L. and C.C. Horvitz. 2005. Projection matrix analysis of the
 demography of an invasive, nonnative shrub (\emph{Ardisia

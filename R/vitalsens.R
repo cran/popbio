@@ -1,5 +1,10 @@
 vitalsens <- function(elements, vitalrates)
 {
+   ## check if elements is matrix expression?
+     #  expression(matrix2(c(0,F,G,S)))
+    # or  expression(0,F,G,S)
+   #  grepl("matrix", elements)
+  
    if(is.vector(vitalrates)){vitalrates<-as.list(vitalrates)}
    if(!is.list(vitalrates)){stop("Vital rates should be a vector or list")}
    if(class(elements)!="expression"){stop("Matrix elements should be an expression")}

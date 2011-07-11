@@ -2,14 +2,20 @@ image2<-function(x, col=c('white', rev(heat.colors(23))),  breaks, log=TRUE,
                  border=NA, box.offset=0.1, round=3, cex, text.cex=1, text.col="black",
                  mar=c(1,3,3,1),  labels=2:3, label.offset=0.1, label.cex=1, srt=90 )
 {
-   ## convert vector like 1:5 to matrix with 1 row (default is one column) else convert data.frame to matrix
-   if(!is.matrix(x)){ if(is.vector(x)){ x<-matrix(x, nrow=1) } else{x<-as.matrix(x)} }
-   if(!is.numeric(x)){ stop("A numeric matrix is required")}
-   if(!missing(cex)) {text.cex=cex; label.cex=cex}  ## cex replaces any values in text.cex or label.cex
-   op<-par(mar=mar, xpd=TRUE)
-   x<-x[nrow(x):1, ,  drop=FALSE]       ## flip matrix so top row on botton   
-   x1<-ncol(x)                          ## number of columns and rows
-   y1<-nrow(x)
+   ## convert vector like 1:5 to matrix with 1 row (default is one column) 
+   if(!is.matrix(x)){
+     x <- t(as.matrix(x))  # only transpose if vector
+   }  
+   if(!is.numeric(x)){
+     stop("A numeric matrix is required")
+   }
+   if(!missing(cex)){
+     text.cex=cex; label.cex=cex
+   }  ## cex replaces any values in text.cex or label.cex
+   op <- par(mar=mar, xpd=TRUE)
+   x  <- x[nrow(x):1, ,  drop=FALSE]       ## flip matrix so top row on botton   
+   x1 <- ncol(x)                          ## number of columns and rows
+   y1 <- nrow(x)
    # hack to get three colors needed for cut
    if(length(col)==1){col<-rep(col, 3)}
    if(length(col)==2){col<-c(col, col[-1])}
