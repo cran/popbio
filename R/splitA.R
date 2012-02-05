@@ -6,11 +6,11 @@ splitA<-function(A, r=1, c=-1)
    if(is.matrix(r) ){
      # logical matrix (TRUE=fertility)
      if(is.logical(r)){
-       tm[r]<-0
-       fm[!r]<-0    
+       tm[r]  <- 0
+       fm[!r] <- 0    
      } else{
-      tm<-A-r
-      fm<-r
+      tm <- A - r
+      fm <- r
      }
    } else{
      tm[r, c] <- 0
