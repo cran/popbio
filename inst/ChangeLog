@@ -1,3 +1,6 @@
+changes in version 2.4.3 (2016-03-31)
+	*fixed error in demo(fillmore) and demo(stage.classify) due to old code from demo graphics
+
 changes in version 2.4.2 (2015-11-02)
 	*fixed Notes required by CRAN, export mean.list and removed invalid URLs in help pages
 

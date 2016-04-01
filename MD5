@@ -1,4 +1,4 @@
-a5dc534147c5c1711a1ddb6cc93f2816 *DESCRIPTION
+60c03bc508212d36aa0ff728b655e304 *DESCRIPTION
 fa3c45c2ef0423ac3254cc3d118fd5ca *NAMESPACE
 fc16e0928ee2621377199065fd65af27 *R/Kendall.R
 ef0aae782841c1c45e2aeb193ca49faa *R/LTRE.R
@@ -59,10 +59,10 @@ a74b19f7f27431a19c1b284c584a48d3 *data/tortoise.rda
 92f84c3d51d368eef08f803a881a4aba *data/woodpecker.rda
 c44aa9d45c24e8324fc287ac23f0cff4 *demo/00Index
 dab32cb6a55f64cd4d8d6c205ba46b43 *demo/Caswell.R
-8f2719fe28ad8bc72f06756cf5951e87 *demo/fillmore.R
-4a3935e837ee13e0d9e07ccfd030b178 *demo/stage.classify.R
+685f61ef5cc181a069f8a8cbb14b148a *demo/fillmore.R
+650d3f06f42ef01f2dd18da246a86f54 *demo/stage.classify.R
 8336a421ec2cb768e6aaccbc006084ea *inst/CITATION
-662258ececd9ca708354441f17c12b0e *inst/ChangeLog
+0ccef0784b78754bc5267a0afb02950c *inst/ChangeLog
 b2d2d0119732ac1e98199797e8339755 *man/01Introduction.Rd
 ae473178c3fa95a757a9c338d5650c03 *man/02Caswell.Rd
 071709aeedc19e31bd1a679559f19c04 *man/03Morris.Rd
