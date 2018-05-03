@@ -1,4 +1,4 @@
-60c03bc508212d36aa0ff728b655e304 *DESCRIPTION
+b4bddab6021b8012feb447ba73cb752c *DESCRIPTION
 fa3c45c2ef0423ac3254cc3d118fd5ca *NAMESPACE
 fc16e0928ee2621377199065fd65af27 *R/Kendall.R
 ef0aae782841c1c45e2aeb193ca49faa *R/LTRE.R
@@ -6,9 +6,10 @@ a516248d0ac09d20d4af80a6b4e79a5c *R/QPmat.R
 fd292be7b3cf9b82c1cb8e421957d47a *R/aq.matrix.R
 79b3c1284a97075860482a5388e8e666 *R/betaval.R
 8a01362fa2e6742290f8671878271be9 *R/boot.transitions.R
+2f2c47a0c8a7e2e9a9155ba9681bd577 *R/colorguide.R
 abbe26e25d12c005850cb10ec947ebb8 *R/countCDFxt.R
 9eae26ce210370ba52fb30564cb65ddd *R/damping.ratio.R
-4906f5690bfd802b3218d640e6420343 *R/eigen.analysis.R
+1670326143fd5e05bde448afecd60c04 *R/eigen.analysis.R
 9f055339c1f804b95bab3fd8a879b0ef *R/elasticity.R
 0e8412d64194e89524dffe2050a29df1 *R/extCDF.R
 d59063fa773c0011322c0c5d38ace4f0 *R/fundamental.matrix.R
@@ -43,6 +44,7 @@ dd51b53880907137ef693b3355f4817a *R/var2.R
 6b2598ea8106ae73594830c9d62b8403 *R/varEst.R
 58d5d2f64c128ff9eb22511a18fd1b70 *R/vitalsens.R
 5c4eb826059a97a58e758bd211462062 *R/vitalsim.R
+05fe7a5d7d66d81357d50a2bc736399b *README.md
 d7819d4ec06256a9d80eae12076281c3 *data/aq.census.rda
 79165d83a280dd435374d5b04fd2577c *data/aq.trans.rda
 e7c5c5ec65e0a1f76469126bc6cfff0f *data/calathea.rda
@@ -62,7 +64,7 @@ dab32cb6a55f64cd4d8d6c205ba46b43 *demo/Caswell.R
 685f61ef5cc181a069f8a8cbb14b148a *demo/fillmore.R
 650d3f06f42ef01f2dd18da246a86f54 *demo/stage.classify.R
 8336a421ec2cb768e6aaccbc006084ea *inst/CITATION
-0ccef0784b78754bc5267a0afb02950c *inst/ChangeLog
+bec886052b3d99deea043d83b897e833 *inst/ChangeLog
 b2d2d0119732ac1e98199797e8339755 *man/01Introduction.Rd
 ae473178c3fa95a757a9c338d5650c03 *man/02Caswell.Rd
 071709aeedc19e31bd1a679559f19c04 *man/03Morris.Rd
@@ -75,9 +77,10 @@ c4406c411765dd1ea1047b7b29e1812e *man/QPmat.Rd
 89cf253036f55116b5d37791dcebe2d4 *man/betaval.Rd
 aa27e9bce8a571f60c83bd1677df5b5a *man/boot.transitions.Rd
 baeeff30868d30e2205bdd35b51ea9db *man/calathea.Rd
+08de048321ae3bd3aa38f3297323d1f8 *man/colorguide.Rd
 17af2385d5e11781fbf8dedbf6371258 *man/countCDFxt.Rd
 ad94d15462571efbbf0c45da68b0b49a *man/damping.ratio.Rd
-a91c41b6007eff5e0c487159ed3b75ea *man/eigen.analysis.Rd
+b80f2dcc455181304683298cbe333f8d *man/eigen.analysis.Rd
 c5bd0863488b816311eb65e9302ad942 *man/elasticity.Rd
 8a5f48e96f33a2274efc3000173ee5f1 *man/extCDF.Rd
 c1fce0f32638a6dde1bfc31cf5470402 *man/fundamental.matrix.Rd
