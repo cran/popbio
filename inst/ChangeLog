@@ -1,3 +1,6 @@
+changes in version 2.7 (2024-03-22)
+  * Fix note about Found export directive that requires package ‘methods’
+
 changes in version 2.7 (2020-02-01)
     * change if(class(V) == "try-error") to  inherits(V, "try-error")
 
